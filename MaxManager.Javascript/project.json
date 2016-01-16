@@ -1,8 +1,8 @@
 ﻿{
   "dependencies": {
     "Antlr4": "4.5.0-alpha003",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "MvvmLightLibs": "5.2.0"
+    "Antlr4.Runtime": "4.5.0-alpha003",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
   },
   "frameworks": {
     "uap10.0": {}

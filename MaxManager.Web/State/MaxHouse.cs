@@ -1,0 +1,59 @@
+/*
+ * Copyright 2011 Witoslaw Koczewsi <wi@koczewski.de>
+ * 
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero
+ * General Public License as published by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public
+ * License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <http://www.gnu.org/licenses/>.
+ */
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace MaxControl.State
+{
+    public class MaxHouse : IMaxObject
+    {
+        public MaxHouse()
+        {
+            Devices = new List<MaxDevice>();
+        }
+
+        public int Id { get; set; }
+    
+        public List<MaxDevice> Devices { get; set; }
+
+        public static MaxHouse CreateDummy() {
+            var dummy = new MaxHouse
+            {
+                Id = 23, 
+                Devices = new List<MaxDevice>
+                {
+                    MaxDevice.CreateDummyForHouse()
+                }
+            };
+            return dummy;
+        }
+
+        public List<MaxDevice> GetDevicesWithLowBattery()
+        {
+            return Devices.Where(device => device.State.BatteryLow).ToList();
+        }
+
+        public List<MaxDevice> GetDevicesWithError()
+        {
+            return Devices.Where(device => !device.IsRadioOk()).ToList();
+        }
+
+        public override String ToString() {
+            return Id.ToString();
+        }
+    }
+}
