@@ -24,22 +24,34 @@
         <StackPanel Grid.Row="3">
             <TextBlock Text="{Binding ConnectResult}" />
             <Button Command="{Binding ConnectCommand}" Content="Connect" />
-            <Button Command="{Binding DiscoverCommand}" Content="Discover" />
 
-            <Grid Width="Auto" HorizontalAlignment="Center" Visibility="{Binding ProgressEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <Grid DataContext="{Binding Discover,Source={StaticResource Locator}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button Command="{Binding DiscoverCommand}" Content="Discover" />
+
+                <Grid Grid.Row="1" Width="Auto" HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <ProgressRing IsActive="True" Width="64" Height="64" Margin="10" />
-                    <TextBlock Grid.Column="1" Text="{Binding ProgressMessage}" FontWeight="Bold" VerticalAlignment="Center" FontSize="24" />
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <ProgressRing Grid.RowSpan="2" IsActive="{Binding Progress.IsEnabled}" Width="64" Height="64" Margin="10" />
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Progress.PrimaryMessage}" FontWeight="Bold" VerticalAlignment="Center" FontSize="24" />
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Progress.SecondaryMessage}" VerticalAlignment="Center" />
+                    </Grid>
+                    <Image Grid.Column="1" Source="Assets/maxcube.jpg" Stretch="Uniform" Width="248" />
                 </Grid>
-                <Image Grid.Column="1" Source="Assets/maxcube.jpg" Stretch="Uniform" Width="248" />
             </Grid>
         </StackPanel>
     </Grid>

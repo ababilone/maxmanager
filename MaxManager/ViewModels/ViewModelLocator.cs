@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using MaxManager.Web.Lan.Discovery;
 using Microsoft.Practices.ServiceLocation;
 
 namespace MaxManager.ViewModels
@@ -19,9 +20,12 @@ namespace MaxManager.ViewModels
 				//SimpleIoc.Default.Register<IDataService, DataService>();
 			}
 
+			SimpleIoc.Default.Register<MaxCubeDiscoverer>();
+			SimpleIoc.Default.Register<DiscoverViewModel>();
 			SimpleIoc.Default.Register<MainViewModel>();
 		}
 
 		public MainViewModel Main => SimpleIoc.Default.GetInstance<MainViewModel>();
+		public DiscoverViewModel Discover => SimpleIoc.Default.GetInstance<DiscoverViewModel>();
 	}
 }
