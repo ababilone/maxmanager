@@ -1,16 +1,19 @@
 ﻿using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using MaxManager.Web.Lan;
 using MaxManager.Web.Lan.Parser;
 
 namespace MaxManager.ViewModels
 {
-	public class MainViewModel : ViewModelBase
+	public class MainViewModel : ViewModelBase, INavigable
 	{
+		private readonly INavigationService _navigationService;
 
-		public MainViewModel()
+		public MainViewModel(INavigationService navigationService)
 		{
+			_navigationService = navigationService;
 			ConnectCommand = new RelayCommand(Connect);
 		}
 
@@ -29,6 +32,16 @@ namespace MaxManager.ViewModels
 			var maxConnector = new MaxConnector("192.168.0.7", maxParser);
 			await maxConnector.LoadState();
 			ConnectResult = maxConnector.ToString();
+		}
+
+		public void Activate(object parameter)
+		{
+			Connect();
+		}
+
+		public void Deactivate(object parameter)
+		{
+			throw new System.NotImplementedException();
 		}
 	}
 }

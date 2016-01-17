@@ -2,21 +2,26 @@
 using System.Linq;
 using System.Windows.Input;
 using Windows.Networking;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using MaxManager.Utils.Timer;
 using MaxManager.ViewModels.Common;
 using MaxManager.Web.Lan.Discovery;
 
 namespace MaxManager.ViewModels
 {
-	public class DiscoverViewModel
+	public class DiscoverViewModel : ViewModelBase, INavigable
 	{
 		private readonly MaxCubeDiscoverer _maxCubeDiscoverer;
+		private readonly INavigationService _navigationService;
 		private readonly ConcurrentDictionary<HostName, CubeInfo> _cubes;
 
-		public DiscoverViewModel(MaxCubeDiscoverer maxCubeDiscoverer)
+		public DiscoverViewModel(MaxCubeDiscoverer maxCubeDiscoverer, INavigationService navigationService)
 		{
 			_maxCubeDiscoverer = maxCubeDiscoverer;
+			_navigationService = navigationService;
+
 			_cubes = new ConcurrentDictionary<HostName, CubeInfo>();
 
 			_maxCubeDiscoverer.CubeDiscovered += (sender, cubeDiscoveredEventArgs) => {
@@ -24,11 +29,9 @@ namespace MaxManager.ViewModels
 			};
 
 			Progress = new Progress();
-			DiscoverCommand = new RelayCommand(Discover);
 		}
 
 		public Progress Progress { get; }
-		public ICommand DiscoverCommand { get; set; }
 
 		private async void Discover()
 		{
@@ -50,8 +53,23 @@ namespace MaxManager.ViewModels
 				Progress.PrimaryMessage = string.Format("Discovered {0} Max! Cube{1} @ {2}", _cubes.Count, _cubes.Count > 1 ? "s" : "", hostNames);
 				Progress.SecondaryMessage = "";
 				Progress.IsEnabled = false;
+
+				if (_cubes.Count == 1)
+				{
+					var keyValuePair = _cubes.FirstOrDefault();
+					_navigationService.NavigateTo(NavigationKeys.Home, keyValuePair.Key);
+				}
 			};
 			countdownTimer.Start(5);
+		}
+
+		public void Activate(object parameter)
+		{
+			Discover();
+		}
+
+		public void Deactivate(object parameter)
+		{
 		}
 	}
 }

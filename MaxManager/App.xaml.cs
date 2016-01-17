@@ -45,12 +45,12 @@ namespace MaxManager
 
 			if (rootFrame.Content == null)
             {
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                rootFrame.Navigate(typeof(Views.DiscoverPage), e.Arguments);
             }
             Window.Current.Activate();
         }
 
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+		void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
