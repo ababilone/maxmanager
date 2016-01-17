@@ -4,9 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:valueConverters="using:MaxManager.ValueConverters"
     mc:Ignorable="d"
     DataContext="{Binding Main,Source={StaticResource Locator}}"
     >
+    <Page.Resources>
+        <valueConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Page.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="15" />
@@ -21,6 +25,22 @@
             <TextBlock Text="{Binding ConnectResult}" />
             <Button Command="{Binding ConnectCommand}" Content="Connect" />
             <Button Command="{Binding DiscoverCommand}" Content="Discover" />
+
+            <Grid Width="Auto" HorizontalAlignment="Center" Visibility="{Binding ProgressEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <ProgressRing IsActive="True" Width="64" Height="64" Margin="10" />
+                    <TextBlock Grid.Column="1" Text="{Binding ProgressMessage}" FontWeight="Bold" VerticalAlignment="Center" FontSize="24" />
+                </Grid>
+                <Image Grid.Column="1" Source="Assets/maxcube.jpg" Stretch="Uniform" Width="248" />
+            </Grid>
         </StackPanel>
     </Grid>
 </Page>

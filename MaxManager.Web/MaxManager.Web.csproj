@@ -109,6 +109,10 @@
   <ItemGroup>
     <Compile Include="Internet\DateUtils.cs" />
     <Compile Include="IPropertySetter.cs" />
+    <Compile Include="Lan\Discovery\CubeDiscoveredEventArgs.cs" />
+    <Compile Include="Lan\Discovery\CubeDiscoveredEventHandler.cs" />
+    <Compile Include="Lan\Discovery\CubeInfo.cs" />
+    <Compile Include="Lan\Discovery\MaxCubeDiscoverer.cs" />
     <Compile Include="Lan\Parser\HMessage.cs" />
     <Compile Include="Lan\Parser\HMessageParser.cs" />
     <Compile Include="Lan\Parser\IMessageParser.cs" />

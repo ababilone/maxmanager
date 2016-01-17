@@ -38,58 +38,11 @@ namespace MaxManager.Web.Lan
 		private readonly string _host;
 		private readonly MaxParser _maxParser;
 		private readonly int _port = 62910;
-		private readonly int _discoveryPort = 23272;
-		private DatagramSocket _datagramSocket;
 
 		public MaxConnector(string host, MaxParser maxParser)
 		{
 			_host = host;
 			_maxParser = maxParser;
-		}
-
-		public async Task DiscoverCubes()
-		{
-			_datagramSocket = new DatagramSocket();
-			_datagramSocket.MessageReceived += datagramSocket_MessageReceived;
-
-			//await _datagramSocket.BindServiceNameAsync(_discoveryPort.ToString());
-
-			using (var outputStream = await _datagramSocket.GetOutputStreamAsync(null, _discoveryPort.ToString()))
-			{
-				using (var dataWriter = new DataWriter(outputStream))
-				{
-					dataWriter.WriteString("eQ3Max*.**********I");
-					await dataWriter.FlushAsync();
-				}
-			}
-		}
-
-		private async void datagramSocket_MessageReceived(DatagramSocket sender, DatagramSocketMessageReceivedEventArgs args)
-		{
-			var remoteAddress = args.RemoteAddress;
-			using (var dataReader = new DataReader(args.GetDataStream()))
-			{
-				var currentLine = string.Empty;
-
-				while (true)
-				{
-					var count = await dataReader.LoadAsync(sizeof(char));
-					if (count != sizeof(char))
-						return;
-
-					var readString = dataReader.ReadString(1);
-					if (readString != "\n")
-					{
-						currentLine += readString;
-					}
-					else
-					{
-						
-						currentLine = string.Empty;
-					}
-				}
-
-			}
 		}
 
 		public async Task LoadState()

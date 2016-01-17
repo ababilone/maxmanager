@@ -4,6 +4,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using GalaSoft.MvvmLight.Threading;
 
 namespace MaxManager
 {
@@ -25,7 +26,7 @@ namespace MaxManager
             }
 #endif
 
-            var rootFrame = Window.Current.Content as Frame;
+			var rootFrame = Window.Current.Content as Frame;
 
             if (rootFrame == null)
             {
@@ -40,7 +41,9 @@ namespace MaxManager
                 Window.Current.Content = rootFrame;
             }
 
-            if (rootFrame.Content == null)
+			DispatcherHelper.Initialize();
+
+			if (rootFrame.Content == null)
             {
                 rootFrame.Navigate(typeof(MainPage), e.Arguments);
             }
