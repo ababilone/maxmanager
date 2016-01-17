@@ -15,7 +15,8 @@ namespace MaxManager.Web.Lan.Parser
 			_messageParsers = new List<IMessageParser>
 			{
 				new HMessageParser(),
-				new MMessageParser()
+				new MMessageParser(),
+				new CMessageParser()
 			};
 		}
 
@@ -25,7 +26,8 @@ namespace MaxManager.Web.Lan.Parser
 			var messageParser = _messageParsers.FirstOrDefault(parser => parser.Accept(payload));
 			if (messageParser == null)
 			{
-				throw new Exception("Unsupported message: " + payload);
+				return null;
+				//throw new Exception("Unsupported message: " + payload);
 			}
 
 			return messageParser.Parse(payload);

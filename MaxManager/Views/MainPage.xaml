@@ -8,21 +8,15 @@
     mc:Ignorable="d"
     DataContext="{Binding Main,Source={StaticResource Locator}}"
     >
-    <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="15" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="#ec6d23" />
-        <Image Grid.Row="1" Margin="5,5,5,0" HorizontalAlignment="Right" Source="../Assets/maxlogo.png" Stretch="None" />
-        <TextBlock Grid.Row="2" Margin="5,0,5,5" Foreground="Black" HorizontalAlignment="Right" Text="Manager" />
-        <StackPanel Grid.Row="3">
-            <TextBlock Text="{Binding ConnectResult}" />
-            <Button Command="{Binding ConnectCommand}" Content="Connect" />
-
-            
-        </StackPanel>
-    </Grid>
+    <views:MaxHeader>
+        <ItemsControl ItemsSource="{Binding Rooms}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="{Binding Name}" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </views:MaxHeader>
 </views:BindablePage>

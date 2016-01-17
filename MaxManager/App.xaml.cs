@@ -40,15 +40,16 @@ namespace MaxManager
 
                 Window.Current.Content = rootFrame;
             }
-
-			DispatcherHelper.Initialize();
+			
 
 			if (rootFrame.Content == null)
             {
                 rootFrame.Navigate(typeof(Views.DiscoverPage), e.Arguments);
             }
             Window.Current.Activate();
-        }
+
+			DispatcherHelper.Initialize();
+		}
 
 		void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {

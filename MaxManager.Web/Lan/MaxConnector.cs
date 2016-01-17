@@ -1,29 +1,3 @@
-/*
- * Copyright 2011 Witoslaw Koczewsi <wi@koczewski.de>
- * 
- * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero
- * General Public License as published by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
- * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public
- * License for more details.
- * 
- * You should have received a copy of the GNU Affero General Public License along with this program. If not,
- * see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * http://www.fhemwiki.de/wiki/MAX
- *
- * http://www.schrankmonster.de/2012/08/17/reverse-engineering-the-elv-max-cube-protocol/
- *
- * http://blog.hekkers.net/2011/08/29/unravelling-the-elv-max-heating-control-system-protocol/
- *
- * https://github.com/Bouni/max-cube-protocol/blob/master/protocol.md
- */
-// TODO broadcast to discover cubes
-
 using System;
 using System.Threading.Tasks;
 using Windows.Networking;
@@ -44,6 +18,8 @@ namespace MaxManager.Web.Lan
 			_host = host;
 			_maxParser = maxParser;
 		}
+
+		public event StateUpdatedEventHandler StateUpdated;
 
 		public async Task LoadState()
 		{
@@ -69,6 +45,19 @@ namespace MaxManager.Web.Lan
 						else
 						{
 							var message = _maxParser.Parse(currentLine);
+
+							var mMessage = message as MMessage;
+							if (mMessage != null)
+							{
+								
+								var stateUpdatedEventArgs = new StateUpdatedEventArgs
+								{
+									Rooms = mMessage.Rooms,
+									Devices = mMessage.Devices
+								};
+								StateUpdated?.Invoke(this, stateUpdatedEventArgs);
+							}
+
 							currentLine = string.Empty;
 						}
 					}

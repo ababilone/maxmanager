@@ -1,11 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using MaxControl.State;
 
 namespace MaxManager.Web.Lan.Parser
 {
+	public class CMessage
+	{
+		public string Serial { get; set; }
+		public string RadioAddress { get; set; }
+		public byte Type { get; set; }
+	}
+
 	public class MMessageParser : IMessageParser
 	{
 		public bool Accept(string payload)
@@ -37,7 +42,7 @@ namespace MaxManager.Web.Lan.Parser
 				var nameLength = data[offset];
 				offset++;
 
-				maxRoom.Name = ExtractString(data, offset, nameLength);
+				maxRoom.Name = MaxUtils.ExtractString(data, offset, nameLength);
 				offset += nameLength;
 				offset += 3;
 
@@ -54,15 +59,15 @@ namespace MaxManager.Web.Lan.Parser
 				var deviceType = data[offset];
 				offset++;
 
-				var radioAddress = ExtractHex(data, offset, 3);
+				var radioAddress = MaxUtils.ExtractHex(data, offset, 3);
 				offset += 3;
-				maxDevice.SerialNumber = ExtractString(data, offset, 10);
+				maxDevice.SerialNumber = MaxUtils.ExtractString(data, offset, 10);
 				offset += 10;
 
 				int nameLength = data[offset];
 				offset++;
 
-				maxDevice.Name = ExtractString(data, offset, nameLength);
+				maxDevice.Name = MaxUtils.ExtractString(data, offset, nameLength);
 				offset += nameLength;
 
 				var room = data[offset];
@@ -76,21 +81,6 @@ namespace MaxManager.Web.Lan.Parser
 				Rooms = rooms,
 				Devices = devices
 			};
-		}
-
-		private string ExtractString(byte[] data, int start, int len)
-		{
-			return Encoding.UTF8.GetString(data.Skip(start - 1).Take(len).ToArray());
-		}
-
-		private string ExtractHex(byte[] data, int start, int len)
-		{
-			var sb = new StringBuilder(len * 2);
-			for (var i = 0; i < len; i++)
-			{
-				sb.Append(string.Format("%02x", data[i] & 0xff));
-			}
-			return sb.ToString();
 		}
 	}
 }
