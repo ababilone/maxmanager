@@ -113,13 +113,16 @@
     <Compile Include="Lan\Discovery\CubeDiscoveredEventHandler.cs" />
     <Compile Include="Lan\Discovery\CubeInfo.cs" />
     <Compile Include="Lan\Discovery\MaxCubeDiscoverer.cs" />
+    <Compile Include="Lan\Parser\CMessage.cs" />
+    <Compile Include="Lan\Parser\CMessageCube.cs" />
+    <Compile Include="Lan\Parser\CMessageHeatingThermostat.cs" />
     <Compile Include="Lan\Parser\CMessageParser.cs" />
+    <Compile Include="Lan\Parser\CMessageWallThermostat.cs" />
     <Compile Include="Lan\Parser\HMessage.cs" />
     <Compile Include="Lan\Parser\HMessageParser.cs" />
     <Compile Include="Lan\Parser\IMessageParser.cs" />
     <Compile Include="Lan\MaxConnector.cs" />
     <Compile Include="Lan\Parser\MaxParser.cs" />
-    <Compile Include="Lan\Parser\MaxUtils.cs" />
     <Compile Include="Lan\Parser\MMessage.cs" />
     <Compile Include="Lan\Parser\MMessageParser.cs" />
     <Compile Include="Lan\StateUpdatedEventArgs.cs" />
@@ -135,6 +138,7 @@
     <Compile Include="State\MaxCubeState.cs" />
     <Compile Include="State\MaxDayTemperatureProfile.cs" />
     <Compile Include="State\MaxDevice.cs" />
+    <Compile Include="State\MaxDeviceType.cs" />
     <Compile Include="State\MaxHeatingThermostatDeviceState.cs" />
     <Compile Include="State\MaxHouse.cs" />
     <Compile Include="State\MaxIDeviceState.cs" />

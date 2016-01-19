@@ -21,7 +21,7 @@ namespace MaxControl.State
     {    
         public DateTime Stop { get; set; }
         
-        public float Temperature { get; set; }
+        public double Temperature { get; set; }
 
         public static MaxTemperatureProfilSwitchPoint CreateDummy(int variant) {
             var dummy = new MaxTemperatureProfilSwitchPoint

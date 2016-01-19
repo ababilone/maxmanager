@@ -25,23 +25,9 @@ namespace MaxControl.State
             SwitchPoints = new List<MaxTemperatureProfilSwitchPoint>();
         }
 
-        public String DayOfWeek { get; set; }
+        public DayOfWeek DayOfWeek { get; set; }
         
         public List<MaxTemperatureProfilSwitchPoint> SwitchPoints { get; set; }
-
-        public static MaxDayTemperatureProfile CreateDummy(int dayOfWeek) {
-            var dummy = new MaxDayTemperatureProfile
-            {
-                DayOfWeek = dayOfWeek.ToString(),
-                SwitchPoints =
-                    new List<MaxTemperatureProfilSwitchPoint>
-                    {
-                        MaxTemperatureProfilSwitchPoint.CreateDummy(0),
-                        MaxTemperatureProfilSwitchPoint.CreateDummy(1)
-                    }
-            };
-            return dummy;
-        }
 
         public MaxTemperatureProfilSwitchPoint GetSwitchPointForNow() {
             return GetSwitchPoint(DateTime.Now.TimeOfDay);
@@ -69,7 +55,7 @@ namespace MaxControl.State
         }
 
         public override String ToString() {
-            return DayOfWeek;
+            return DayOfWeek.ToString();
         }
     }
 }

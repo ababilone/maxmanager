@@ -30,18 +30,6 @@ namespace MaxControl.State
     
         public List<MaxDevice> Devices { get; set; }
 
-        public static MaxHouse CreateDummy() {
-            var dummy = new MaxHouse
-            {
-                Id = 23, 
-                Devices = new List<MaxDevice>
-                {
-                    MaxDevice.CreateDummyForHouse()
-                }
-            };
-            return dummy;
-        }
-
         public List<MaxDevice> GetDevicesWithLowBattery()
         {
             return Devices.Where(device => device.State.BatteryLow).ToList();

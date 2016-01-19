@@ -50,25 +50,6 @@ namespace MaxControl.State
 
         public List<MaxRoom> Rooms { get; set; }
 
-        public static MaxCubeState CreateDummy() {
-            var dummy = new MaxCubeState
-            {
-                CubeLastPing = MaxCubeLastPing.CreateDummy(),
-                DaylightSaving = false,
-                FirmwareVersion = 7,
-                House = MaxHouse.CreateDummy(),
-                PushButtonConfiguration = MaxPushButtonConfiguration.CreateDummy(),
-                Rooms = new List<MaxRoom>(),
-                NtpCounter = 1,
-                StateCubeTime = DateTimeUtils.CurrentTimeMillis() - 123456,
-                CubeDate = "2011-01-02"
-            };
-            for (var i = 0; i < 5; i++) {
-                dummy.Rooms.Add(MaxRoom.CreateDummy(i));
-            }
-            return dummy;
-        }
-
         public bool IsInSync() {
             return IsInSync(TimeSpan.FromSeconds(15));
         }

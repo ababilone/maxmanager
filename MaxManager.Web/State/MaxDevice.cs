@@ -17,83 +17,60 @@ using System;
 
 namespace MaxControl.State
 {
-    public class MaxDevice : IMaxObject
-    {
-        public String DeviceType { get; set; }
-     
-        public int RadioAddress { get; set; }
-        
-        public String SerialNumber { get; set; }
-        
-        public String Name { get; set; }
-        
-        public String RadioState { get; set; }
-        
-        public DeviceState State { get; set; }
-        
-        public String StateInfo { get; set; }
-        
-        public MaxRoom Room { get; set; }
+	public class MaxDevice : IMaxObject
+	{
+		public MaxDeviceType Type { get; set; }
 
-        public static MaxDevice CreateDummyForRoom(int variant) {
-            var dummy = new MaxDevice
-            {
-                DeviceType = "? roomDevice",
-                Name = "dummy room device " + variant,
-                RadioAddress = 0,
-                RadioState = "radioState",
-                SerialNumber = "serial123",
-                State = variant == 0
-                    ? (DeviceState) MaxShutterContactDeviceState.CreateDummy(variant)
-                    : MaxHeatingThermostatDeviceState.CreateDummy(variant),
-                StateInfo = "state info"
-            };
-            return dummy;
-        }
+		public string RadioAddress { get; set; }
 
-        public static MaxDevice CreateDummyForHouse() {
-            var dummy = new MaxDevice
-            {
-                DeviceType = "? houseDevice",
-                Name = "dummy house device",
-                RadioAddress = 0,
-                RadioState = "radioState",
-                SerialNumber = "serial123",
-                State = MaxPushButtonDeviceState.CreateDummy(),
-                StateInfo = "state info"
-            };
-            return dummy;
-        }
+		public string SerialNumber { get; set; }
 
-        public bool IsRadioOk() {
-            return IsRadioStateOk() && !State.TransmitError;
-        }
+		public string Name { get; set; }
 
-        public bool IsRadioStateOk() {
-            return "Ok".Equals(RadioState);
-        }
+		public string RadioState { get; set; }
 
-        public String GetNameWithRoomName() {
-            MaxRoom r = Room;
-            if (r == null) 
-                return Name;
-            return r.Name + ", " + Name;
-        }
+		public DeviceState State { get; set; }
 
-        public bool IsDeviceTypeShutterContact() {
-            return "ShutterContact".Equals(DeviceType);
-        }
+		public string StateInfo { get; set; }
 
-        public bool IsDeviceTypeWallMountedThermostat() {
-            return "WallMountedThermostat".Equals(DeviceType);
-        }
+		public MaxRoom Room { get; set; }
 
-        public override String ToString() {
-            return DeviceType + ": " + Name + " " + State;
-        }
+		public bool IsRadioOk()
+		{
+			return IsRadioStateOk() && !State.TransmitError;
+		}
 
-        public void Wire(MaxRoom room) {
-            Room = room;
-        }
-    }
+		public bool IsRadioStateOk()
+		{
+			return "Ok".Equals(RadioState);
+		}
+
+		public string GetNameWithRoomName()
+		{
+			var r = Room;
+			if (r == null)
+				return Name;
+			return r.Name + ", " + Name;
+		}
+
+		public bool IsDeviceTypeShutterContact()
+		{
+			return Type == MaxDeviceType.ShutterContact;
+		}
+
+		public bool IsDeviceTypeWallMountedThermostat()
+		{
+			return Type == MaxDeviceType.WallThermostat;
+		}
+
+		public override string ToString()
+		{
+			return Type + ": " + Name + " " + State;
+		}
+
+		public void Wire(MaxRoom room)
+		{
+			Room = room;
+		}
+	}
 }

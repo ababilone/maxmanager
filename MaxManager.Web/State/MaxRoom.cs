@@ -81,37 +81,7 @@ namespace MaxControl.State
         public float ActualTemperature { get; set; }
 
         public MaxCubeState Cube { get; set; }
-
-        public static MaxRoom CreateDummy(int variant) {
-            var dummy = new MaxRoom
-            {
-                Id = variant,
-                Name = "room " + variant,
-                Order = variant,
-                BoostDuration = 23,
-                BoostValveAngle = 23,
-                ComfortTemperature = 42.23f,
-                EcoTemperature = 23.42f,
-                MaximumTemperature = 99,
-                SetPointTemperature = 33.33f,
-                SetPointTemperatureValid = variant != 1,
-                ControlMode = "controlMode",
-                DecalcificationDay = "decalcificationDay",
-                Devices = new List<MaxDevice> {MaxDevice.CreateDummyForRoom(0), MaxDevice.CreateDummyForRoom(1)},
-                StateChanged = variant == 2,
-                StateDirty = variant == 3,
-                TemperatureControllable = variant == 4,
-                TemperatureMode = "temperatureMode",
-                TemporaryModeStopDate = new DateTime(DateTimeUtils.CurrentTimeMillis() + 12345678),
-                WeekTemperatureProfile = MaxWeekTemperatureProfile.CreateDummy(variant),
-                WindowOpenDuration = variant,
-                WindowOpenTemperature = 11.11f,
-                MaximumNoOfHeatingThermostats = 23,
-                MaximumNoOfShutterContacts = 23,
-                MaximumNoOfWallMountedThermostats = 23
-            };
-            return dummy;
-        }
+	    public string GroupRfAddress { get; set; }
 
         public String GetUniqueId() {
             return Cube.SerialNumber + ":" + Id;
@@ -135,7 +105,7 @@ namespace MaxControl.State
             return ret;
         }
 
-        public float? GetCurrentAutoTemperatureFromProfile() {
+        public double? GetCurrentAutoTemperatureFromProfile() {
             var switchPoint = WeekTemperatureProfile.GetDayTemperatureProfileForToday().GetSwitchPointForNow();
             if (switchPoint == null) 
                 return null;

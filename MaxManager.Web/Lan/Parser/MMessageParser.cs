@@ -1,16 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using MaxControl.State;
 
 namespace MaxManager.Web.Lan.Parser
 {
-	public class CMessage
-	{
-		public string Serial { get; set; }
-		public string RadioAddress { get; set; }
-		public byte Type { get; set; }
-	}
-
 	public class MMessageParser : IMessageParser
 	{
 		public bool Accept(string payload)
@@ -33,18 +28,24 @@ namespace MaxManager.Web.Lan.Parser
 			var rooms = new List<MaxRoom>(roomCount);
 			for (var i = 0; i < roomCount; i++)
 			{
-				var maxRoom = new MaxRoom
-				{
-					Id = data[offset + 0]
-				};
+				var id = (int)data[offset + 0];
 				offset++;
 
 				var nameLength = data[offset];
 				offset++;
 
-				maxRoom.Name = MaxUtils.ExtractString(data, offset, nameLength);
+				var name = Encoding.UTF8.GetString(data, offset, nameLength);
 				offset += nameLength;
+
+				var groupRfAddress = BitConverter.ToString(data, offset, 3);
 				offset += 3;
+
+				var maxRoom = new MaxRoom
+				{
+					Id = id,
+					Name = name,
+					GroupRfAddress = groupRfAddress
+				};
 
 				rooms.Add(maxRoom);
 			}
@@ -55,24 +56,34 @@ namespace MaxManager.Web.Lan.Parser
 			var devices = new List<MaxDevice>(deviceCount);
 			for (var i = 0; i < deviceCount; i++)
 			{
-				var maxDevice = new MaxDevice();
-				var deviceType = data[offset];
+				var maxDeviceType = (MaxDeviceType)data[offset];
 				offset++;
 
-				var radioAddress = MaxUtils.ExtractHex(data, offset, 3);
+				var radioAddress = BitConverter.ToString(data, offset, 3);
 				offset += 3;
-				maxDevice.SerialNumber = MaxUtils.ExtractString(data, offset, 10);
+				var serialNumber = Encoding.UTF8.GetString(data, offset, 10);
 				offset += 10;
 
 				int nameLength = data[offset];
 				offset++;
 
-				maxDevice.Name = MaxUtils.ExtractString(data, offset, nameLength);
+				var name = Encoding.UTF8.GetString(data, offset, nameLength);
 				offset += nameLength;
 
-				var room = data[offset];
+				var roomId = (int)data[offset];
 				offset++;
 
+				var maxRoom = rooms.SingleOrDefault(room => room.Id == roomId);
+				var maxDevice = new MaxDevice
+				{
+					SerialNumber = serialNumber,
+					Name = name,
+					Type = maxDeviceType,
+					RadioAddress = radioAddress,
+					Room = maxRoom
+				};
+
+				maxRoom?.Devices.Add(maxDevice);
 				devices.Add(maxDevice);
 			}
 

@@ -19,19 +19,13 @@ using System.Collections.Generic;
 namespace MaxControl.State
 {
     public class MaxWeekTemperatureProfile : IMaxObject
-    {    
-        public List<MaxDayTemperatureProfile> DayTemperatureProfiles { get; set; }
+    {
+	    public MaxWeekTemperatureProfile()
+	    {
+		    DayTemperatureProfiles = new List<MaxDayTemperatureProfile>();
+	    }
 
-        public static MaxWeekTemperatureProfile CreateDummy(int variant) {
-            var dummy = new MaxWeekTemperatureProfile
-            {
-                DayTemperatureProfiles = new List<MaxDayTemperatureProfile>()
-            };
-            for (var i = 0; i < 7; i++) {
-                dummy.DayTemperatureProfiles.Add(MaxDayTemperatureProfile.CreateDummy(i));
-            }
-            return dummy;
-        }
+        public List<MaxDayTemperatureProfile> DayTemperatureProfiles { get; set; }
 
         public MaxDayTemperatureProfile GetDayTemperatureProfileForToday() {
             return GetDayTemperatureProfile(DateTime.Now.DayOfWeek);
