@@ -13,25 +13,13 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
-using System;
-
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public class MaxShutterContactDeviceState : DeviceState 
     {
         public bool WindowOpen { get; set; }
 
-        public static MaxShutterContactDeviceState CreateDummy(int variant) {
-            var dummy = new MaxShutterContactDeviceState
-            {
-                WindowOpen = variant == 1,
-                BatteryLow = false,
-                TransmitError = false
-            };
-            return dummy;
-        }
-
-        public override String ToString() {
+        public override string ToString() {
             if (WindowOpen) 
                 return "windowOpen " + base.ToString();
             return base.ToString();

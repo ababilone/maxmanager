@@ -16,7 +16,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public class MaxDayTemperatureProfile : IMaxObject
     {
@@ -54,7 +54,7 @@ namespace MaxControl.State
             return best;
         }
 
-        public override String ToString() {
+        public override string ToString() {
             return DayOfWeek.ToString();
         }
     }

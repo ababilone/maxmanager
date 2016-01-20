@@ -18,23 +18,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public class MaxCubeState : IMaxObject
     {
-
         public MaxCubeState()
         {
             Rooms = new List<MaxRoom>();
         }
 
-        public String SerialNumber { get; set; }
+        public string SerialNumber { get; set; }
         
         public int RfAddress { get; set; }
         
         public int FirmwareVersion { get; set; }
         
-        public String CubeDate { get; set; }
+        public string CubeDate { get; set; }
         
         public long StateCubeTime { get; set; }
         
@@ -91,14 +90,14 @@ namespace MaxControl.State
             return Rooms.Where(room => room.IsWindowOpen()).ToList();
         }
 
-        public List<String> GetRoomsWithOpenWindowAsRoomNames() {
+        public List<string> GetRoomsWithOpenWindowAsRoomNames() {
             var rooms = GetRoomsWithOpenWindow();
-            var ret = new List<String>(rooms.Count);
+            var ret = new List<string>(rooms.Count);
             ret.AddRange(rooms.Select(room => room.Name));
             return ret;
         }
 
-        public override String ToString() {
+        public override string ToString() {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append(FirmwareVersion);
             if (DaylightSaving) 
@@ -130,6 +129,5 @@ namespace MaxControl.State
             all.Sort();
             return all;
         }
-
     }
 }

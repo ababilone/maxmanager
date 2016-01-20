@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using MaxControl.State;
+using MaxManager.Web.State;
 
 namespace MaxManager.Web.Lan.Parser
 {

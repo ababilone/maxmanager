@@ -13,9 +13,7 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
-using System;
-
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public sealed class MaxIDeviceState : DeviceState 
     {
@@ -27,7 +25,7 @@ namespace MaxControl.State
         
         public float ActualTemperature { get; set; }
 
-        public override String ToString() {
+        public override string ToString() {
             var s = base.ToString();
             if (ActualTemperature > 0)
                 s += " " + ActualTemperature;

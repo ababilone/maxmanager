@@ -13,9 +13,7 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
-using System;
-
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
 	public class MaxDevice : IMaxObject
 	{

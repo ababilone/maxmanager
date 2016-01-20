@@ -5,9 +5,9 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Views;
-using MaxControl.State;
 using MaxManager.Web.Lan;
 using MaxManager.Web.Lan.Parser;
+using MaxManager.Web.State;
 
 namespace MaxManager.ViewModels
 {

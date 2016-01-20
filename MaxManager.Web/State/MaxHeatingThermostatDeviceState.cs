@@ -13,9 +13,7 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
-using System;
-
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public class MaxHeatingThermostatDeviceState : DeviceState 
     {    
@@ -23,18 +21,7 @@ namespace MaxControl.State
 
         public float TemperatureOffset { get; set; }
 
-        public static MaxHeatingThermostatDeviceState CreateDummy(int variant) {
-            var dummy = new MaxHeatingThermostatDeviceState
-            {
-                SetPointTemperature = 42.23f,
-                TemperatureOffset = variant == 0 ? 1 : 0,
-                BatteryLow = false,
-                TransmitError = false
-            };
-            return dummy;
-        }
-
-        public override String ToString() {
+        public override string ToString() {
             return SetPointTemperature + " " + TemperatureOffset + " " + base.ToString();
         }
     }

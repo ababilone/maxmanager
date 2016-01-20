@@ -13,17 +13,9 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public class MaxPushButtonDeviceState : DeviceState 
     {
-        public static MaxPushButtonDeviceState CreateDummy() {
-            var dummy = new MaxPushButtonDeviceState
-            {
-                BatteryLow = true,
-                TransmitError = true
-            };
-            return dummy;
-        }
     }
 }

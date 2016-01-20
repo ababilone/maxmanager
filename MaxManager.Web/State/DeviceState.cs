@@ -13,10 +13,9 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
-using System;
 using System.Text;
 
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public class DeviceState : IMaxObject
     {
@@ -24,7 +23,7 @@ namespace MaxControl.State
         
         public bool BatteryLow { get; set; }
 
-        public override String ToString() {
+        public override string ToString() {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append(GetType().Name);
             

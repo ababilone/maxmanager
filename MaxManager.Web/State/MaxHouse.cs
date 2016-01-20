@@ -13,11 +13,10 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public class MaxHouse : IMaxObject
     {
@@ -40,7 +39,7 @@ namespace MaxControl.State
             return Devices.Where(device => !device.IsRadioOk()).ToList();
         }
 
-        public override String ToString() {
+        public override string ToString() {
             return Id.ToString();
         }
     }

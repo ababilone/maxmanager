@@ -13,26 +13,15 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
-using System;
-
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public class MaxPushButtonKeyConfiguration : IMaxObject
     {
-        public String Mode { get; set; }
+        public string Mode { get; set; }
 
         public float Temperature { get; set; }
 
-        public static MaxPushButtonKeyConfiguration CreateDummy(int variant) {
-            var dummy = new MaxPushButtonKeyConfiguration
-            {
-                Mode = "?mode" + variant,
-                Temperature = 23.23f
-            };
-            return dummy;
-        }
-
-        public override String ToString() {
+        public override string ToString() {
             return Mode + " " + Temperature;
         }
     }

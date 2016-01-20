@@ -16,7 +16,7 @@
 using System;
 using System.Text;
 
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public class MaxCubeLastPing : IMaxObject
     {
@@ -24,16 +24,7 @@ namespace MaxControl.State
         
         public bool Outdated { get; set; }
 
-        public static MaxCubeLastPing CreateDummy() {
-            var dummy = new MaxCubeLastPing
-            {
-                Date = new DateTime().AddMinutes(-15),
-                Outdated = false
-            };
-            return dummy;
-        }
-
-        public override String ToString() {
+        public override string ToString() {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append(DateUtils.FormatDateTime(Date));
             if (Outdated)

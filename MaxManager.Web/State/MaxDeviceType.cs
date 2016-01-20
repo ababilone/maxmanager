@@ -1,4 +1,4 @@
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
 	public enum MaxDeviceType
 	{

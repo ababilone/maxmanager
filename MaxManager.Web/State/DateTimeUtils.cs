@@ -1,6 +1,6 @@
 using System;
 
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public static class DateTimeUtils
     {

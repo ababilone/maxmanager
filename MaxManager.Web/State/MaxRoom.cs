@@ -17,7 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public class MaxRoom : IMaxObject
     {
@@ -28,7 +28,7 @@ namespace MaxControl.State
 
         public int Id { get; set; }
         
-        public String Name { get; set; }
+        public string Name { get; set; }
         
         public int Order { get; set; }
         
@@ -46,9 +46,9 @@ namespace MaxControl.State
         
         public bool SetPointTemperatureValid { get; set; }
         
-        public String ControlMode { get; set; }
+        public string ControlMode { get; set; }
         
-        public String DecalcificationDay { get; set; }
+        public string DecalcificationDay { get; set; }
         
         public int DecalcificationHour { get; set; }
         
@@ -60,7 +60,7 @@ namespace MaxControl.State
         
         public bool TemperatureControllable { get; set; }
         
-        public String TemperatureMode { get; set; }
+        public string TemperatureMode { get; set; }
         
         public DateTime TemporaryModeStopDate { get; set; }
         
@@ -83,7 +83,7 @@ namespace MaxControl.State
         public MaxCubeState Cube { get; set; }
 	    public string GroupRfAddress { get; set; }
 
-        public String GetUniqueId() {
+        public string GetUniqueId() {
             return Cube.SerialNumber + ":" + Id;
         }
 

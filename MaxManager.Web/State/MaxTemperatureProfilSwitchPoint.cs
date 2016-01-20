@@ -15,7 +15,7 @@
 
 using System;
 
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public class MaxTemperatureProfilSwitchPoint : IMaxObject
     {    
@@ -23,23 +23,11 @@ namespace MaxControl.State
         
         public double Temperature { get; set; }
 
-        public static MaxTemperatureProfilSwitchPoint CreateDummy(int variant) {
-            var dummy = new MaxTemperatureProfilSwitchPoint
-            {
-                Temperature = variant == 0 ? 23.42f : 42.23f,
-                Stop =
-                    new DateTime(variant == 0
-                        ? DateTimeUtils.CurrentTimeMillis() - 10000
-                        : DateTimeUtils.CurrentTimeMillis() + 10000)
-            };
-            return dummy;
-        }
-
         public TimeSpan GetStopAsTime() {
             return Stop.TimeOfDay;
         }
 
-        public override String ToString() {
+        public override string ToString() {
             return DateUtils.FormatDateTime(Stop) + " " + Temperature;
         }
     }

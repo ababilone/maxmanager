@@ -13,9 +13,7 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
-using System;
-
-namespace MaxControl.State
+namespace MaxManager.Web.State
 {
     public class MaxPushButtonConfiguration : IMaxObject
     {
@@ -23,16 +21,7 @@ namespace MaxControl.State
         
         public MaxPushButtonKeyConfiguration LowerKey { get; set; }
 
-        public static MaxPushButtonConfiguration CreateDummy() {
-            var dummy = new MaxPushButtonConfiguration
-            {
-                UpperKey = MaxPushButtonKeyConfiguration.CreateDummy(0),
-                LowerKey = MaxPushButtonKeyConfiguration.CreateDummy(1)
-            };
-            return dummy;
-        }
-
-        public override String ToString() {
+        public override string ToString() {
             return GetType().Name;
         }
     }
