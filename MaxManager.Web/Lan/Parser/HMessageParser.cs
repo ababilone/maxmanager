@@ -1,3 +1,5 @@
+using MaxManager.Web.Lan.Parser.Message;
+
 namespace MaxManager.Web.Lan.Parser
 {
 	public class HMessageParser : IMessageParser

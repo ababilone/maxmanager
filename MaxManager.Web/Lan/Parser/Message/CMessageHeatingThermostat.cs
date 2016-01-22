@@ -1,10 +1,20 @@
+using System;
 using MaxManager.Web.State;
 
-namespace MaxManager.Web.Lan.Parser
+namespace MaxManager.Web.Lan.Parser.Message
 {
-	public class CMessageWallThermostat
+	public class CMessageHeatingThermostat
 	{
 		public MaxWeekTemperatureProfile MaxWeekTemperatureProfile { get; set; }
+		public double ValveOffset { get; set; }
+		public double MaxValeSetting { get; set; }
+		public TimeSpan DecalcificationTime { get; set; }
+		public DayOfWeek DecalcificationDay { get; set; }
+		public int BoostPercentage { get; set; }
+		public TimeSpan BoostDuration { get; set; }
+		public TimeSpan WindowOpenDuration { get; set; }
+		public double WindowOpenTemperature { get; set; }
+		public double TemperatureOffset { get; set; }
 		public double MinSetTemperature { get; set; }
 		public double MaxSetPointTemperature { get; set; }
 		public double EcoTemperature { get; set; }

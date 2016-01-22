@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MaxManager.Web.State;
 
-namespace MaxManager.Web.Lan.Parser
+namespace MaxManager.Web.Lan.Parser.Message
 {
 	class MMessage
 	{

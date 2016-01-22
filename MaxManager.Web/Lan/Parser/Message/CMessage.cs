@@ -1,4 +1,4 @@
-namespace MaxManager.Web.Lan.Parser
+namespace MaxManager.Web.Lan.Parser.Message
 {
 	public class CMessage
 	{

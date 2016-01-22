@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MaxManager.Web.Lan.Parser.Message;
 using MaxManager.Web.State;
 
 namespace MaxManager.Web.Lan.Parser

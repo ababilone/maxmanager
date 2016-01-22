@@ -4,6 +4,7 @@ using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using MaxManager.Web.Lan.Parser;
+using MaxManager.Web.Lan.Parser.Message;
 
 namespace MaxManager.Web.Lan
 {

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using MaxManager.Web.Lan.Parser.Message;
 using MaxManager.Web.State;
 
 namespace MaxManager.Web.Lan.Parser
