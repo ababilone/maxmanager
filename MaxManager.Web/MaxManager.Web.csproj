@@ -107,7 +107,6 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Internet\DateUtils.cs" />
     <Compile Include="IPropertySetter.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventArgs.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventHandler.cs" />
@@ -133,14 +132,11 @@
     <Compile Include="PropertySetter.cs" />
     <Compile Include="State\DateTimeUtils.cs" />
     <Compile Include="State\DeviceState.cs" />
-    <Compile Include="State\IMaxObject.cs" />
-    <Compile Include="State\MaxCubeLastPing.cs" />
     <Compile Include="State\MaxCubeState.cs" />
     <Compile Include="State\MaxDayTemperatureProfile.cs" />
     <Compile Include="State\MaxDevice.cs" />
     <Compile Include="State\MaxDeviceType.cs" />
     <Compile Include="State\MaxHeatingThermostatDeviceState.cs" />
-    <Compile Include="State\MaxHouse.cs" />
     <Compile Include="State\MaxIDeviceState.cs" />
     <Compile Include="State\MaxPushButtonConfiguration.cs" />
     <Compile Include="State\MaxPushButtonDeviceState.cs" />
