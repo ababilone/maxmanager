@@ -1,5 +1,7 @@
-# maxmanager
-Universal Windows Application that allows to manage a Max! / eQ-3 cube
+# maxmanager 
+Universal Windows Application that allows to manage a Max! / eQ-3 cube 
+
+[![Build status](https://ci.appveyor.com/api/projects/status/9bnb3eg7nqsij7lq?svg=true)](https://ci.appveyor.com/project/ababilone/maxmanager)
 
 #### Features ####
 
