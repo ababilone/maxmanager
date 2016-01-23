@@ -1,6 +1,6 @@
 namespace MaxManager.Web.Lan.Parser.Message
 {
-	public class CMessageCube
+	public class CMessageCube : CMessage
 	{
 		public bool IsPortalEnabled { get; set; }
 		public string PortalUrl { get; set; }

@@ -14,28 +14,31 @@ namespace MaxManager.Web.Lan.Parser
 
 		public object Parse(string payload)
 		{
-			var tokenizer = payload.Substring(2).Split(',');
-			var rfAddress = tokenizer[0];
-			var dataAsString = tokenizer[1];
+			var address = payload.Substring(2).Split(',')[0];
+			var rfAddress = FormatRfAddress(address);
+			var dataAsString = payload.Substring(2).Split(',')[1];
 			var data = Convert.FromBase64String(dataAsString);
-
-			var state = new DeviceState();
 
 			var deviceType = (MaxDeviceType)data[4];
 			switch (deviceType)
 			{
 				case MaxDeviceType.Cube:
-					return ParseCube(data);
+					return ParseCube(data, rfAddress);
 				case MaxDeviceType.HeatingThermostat:
 				case MaxDeviceType.HeatingThermostatPlus:
-					return ParseHeatingThermostat(data);
+					return ParseHeatingThermostat(data, rfAddress);
 				case MaxDeviceType.WallThermostat:
-					return ParseWallThermostat(data);
+					return ParseWallThermostat(data, rfAddress);
 			}
 			return null;
 		}
 
-		public CMessageCube ParseCube(byte[] data)
+		private static string FormatRfAddress(string address)
+		{
+			return (address[0] + address[1] + "-" + address[2] + address[3] + "-" + address[4] + address[5]).ToUpper();
+		}
+
+		public CMessageCube ParseCube(byte[] data, string rfAddress)
 		{
 			var isPortalEnabled = data[0] > 0;
 			var deviceType = (MaxDeviceType)data[4];
@@ -45,6 +48,8 @@ namespace MaxManager.Web.Lan.Parser
 
 			return new CMessageCube
 			{
+				RfAddress = rfAddress,
+				DeviceType = deviceType,
 				IsPortalEnabled = isPortalEnabled,
 				PortalUrl = portalUrl,
 				TimeZoneWinter = timeZoneWinter,
@@ -52,7 +57,7 @@ namespace MaxManager.Web.Lan.Parser
 			};
 		}
 
-		public CMessageHeatingThermostat ParseHeatingThermostat(byte[] data)
+		public CMessageHeatingThermostat ParseHeatingThermostat(byte[] data, string rfAddress)
 		{
 			var dataLength = (int)data[0];
 			var addressOfDevice = BitConverter.ToString(data, 1, 3);
@@ -68,7 +73,7 @@ namespace MaxManager.Web.Lan.Parser
 			var temperatureOffset = data[22] / 2.0;
 			var windowOpenTemperature = data[23] / 2.0;
 			var windowOpenDuration = TimeSpan.FromMinutes(data[24] / 5.0);
-			
+
 			var boost = data[25];
 
 			var boostDuration = TimeSpan.FromMinutes((boost >> 5) * 5);
@@ -87,9 +92,10 @@ namespace MaxManager.Web.Lan.Parser
 
 			return new CMessageHeatingThermostat
 			{
+				RfAddress = rfAddress,
+				DeviceType = deviceType,
 				DataLength = dataLength,
 				AddressOfDevice = addressOfDevice,
-				DeviceType = deviceType,
 				RoomId = roomId,
 				FirmewareVersion = firmewareVersion,
 				TestResult = testResult,
@@ -107,11 +113,11 @@ namespace MaxManager.Web.Lan.Parser
 				DecalcificationTime = decalcificationTime,
 				MaxValeSetting = maxValeSetting,
 				ValveOffset = valveOffset,
-				MaxWeekTemperatureProfile = maxWeekTemperatureProfile
+				WeekTemperatureProfile = maxWeekTemperatureProfile
 			};
 		}
 
-		public CMessageWallThermostat ParseWallThermostat(byte[] data)
+		public CMessageWallThermostat ParseWallThermostat(byte[] data, string rfAddress)
 		{
 			var dataLength = (int)data[0];
 			var addressOfDevice = BitConverter.ToString(data, 1, 3);
@@ -131,9 +137,10 @@ namespace MaxManager.Web.Lan.Parser
 
 			return new CMessageWallThermostat
 			{
+				RfAddress = rfAddress,
+				DeviceType = deviceType,
 				DataLength = dataLength,
 				AddressOfDevice = addressOfDevice,
-				DeviceType = deviceType,
 				RoomId = roomId,
 				FirmewareVersion = firmewareVersion,
 				TestResult = testResult,

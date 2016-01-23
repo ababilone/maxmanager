@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Views;
 using MaxManager.Web.Lan;
+using MaxManager.Web.Lan.Merger;
 using MaxManager.Web.Lan.Parser;
 using MaxManager.Web.State;
 
@@ -37,7 +38,8 @@ namespace MaxManager.ViewModels
 		private async void Connect()
 		{
 			var maxParser = new MaxParser();
-			var maxConnector = new MaxConnector("192.168.0.7", maxParser);
+			var maxMerger = new MaxMerger();
+			var maxConnector = new MaxConnector("192.168.0.7", maxParser, maxMerger);
 			maxConnector.StateUpdated += MaxConnectorOnStateUpdated;
 			await maxConnector.LoadState();
 			ConnectResult = maxConnector.ToString();

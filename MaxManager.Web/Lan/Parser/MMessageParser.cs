@@ -80,7 +80,7 @@ namespace MaxManager.Web.Lan.Parser
 					SerialNumber = serialNumber,
 					Name = name,
 					Type = maxDeviceType,
-					RadioAddress = radioAddress,
+					RfAddress = radioAddress,
 					Room = maxRoom
 				};
 

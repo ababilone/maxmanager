@@ -3,21 +3,27 @@ using System.Threading.Tasks;
 using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
+using MaxManager.Web.Lan.Merger;
 using MaxManager.Web.Lan.Parser;
 using MaxManager.Web.Lan.Parser.Message;
+using MaxManager.Web.State;
 
 namespace MaxManager.Web.Lan
 {
 	public class MaxConnector : IDisposable
 	{
 		private readonly string _host;
-		private readonly MaxParser _maxParser;
 		private readonly int _port = 62910;
+		private readonly MaxParser _maxParser;
+		private readonly MaxMerger _maxMerger;
+		private MaxCube _maxCube;
 
-		public MaxConnector(string host, MaxParser maxParser)
+		public MaxConnector(string host, MaxParser maxParser, MaxMerger maxMerger)
 		{
 			_host = host;
 			_maxParser = maxParser;
+			_maxMerger = maxMerger;
+			_maxCube = new MaxCube();
 		}
 
 		public event StateUpdatedEventHandler StateUpdated;
@@ -34,8 +40,8 @@ namespace MaxManager.Web.Lan
 
 					while (true)
 					{
-						var count = await dataReader.LoadAsync(sizeof (char));
-						if (count != sizeof (char))
+						var count = await dataReader.LoadAsync(sizeof(char));
+						if (count != sizeof(char))
 							return;
 
 						var readString = dataReader.ReadString(1);
@@ -46,20 +52,16 @@ namespace MaxManager.Web.Lan
 						else
 						{
 							var message = _maxParser.Parse(currentLine);
+							_maxMerger.Merge(_maxCube, message);
 
-							var mMessage = message as MMessage;
-							if (mMessage != null)
+							var stateUpdatedEventArgs = new StateUpdatedEventArgs
 							{
-								
-								var stateUpdatedEventArgs = new StateUpdatedEventArgs
-								{
-									Rooms = mMessage.Rooms,
-									Devices = mMessage.Devices
-								};
-								StateUpdated?.Invoke(this, stateUpdatedEventArgs);
-							}
+								Rooms = _maxCube.Rooms,
+							};
+							StateUpdated?.Invoke(this, stateUpdatedEventArgs);
 
 							currentLine = string.Empty;
+							await Task.Delay(50);
 						}
 					}
 				}
@@ -68,7 +70,7 @@ namespace MaxManager.Web.Lan
 
 		public void Dispose()
 		{
-			
+
 		}
 	}
 }

@@ -112,6 +112,12 @@
     <Compile Include="Lan\Discovery\CubeDiscoveredEventHandler.cs" />
     <Compile Include="Lan\Discovery\CubeInfo.cs" />
     <Compile Include="Lan\Discovery\MaxCubeDiscoverer.cs" />
+    <Compile Include="Lan\Merger\CMessageMerger.cs" />
+    <Compile Include="Lan\Merger\HMessageMerger.cs" />
+    <Compile Include="Lan\Merger\IMessageMerger.cs" />
+    <Compile Include="Lan\Merger\MaxMerger.cs" />
+    <Compile Include="Lan\Merger\MessageMerger.cs" />
+    <Compile Include="Lan\Merger\MMessageMerger.cs" />
     <Compile Include="Lan\Parser\Message\CMessage.cs" />
     <Compile Include="Lan\Parser\Message\CMessageCube.cs" />
     <Compile Include="Lan\Parser\Message\CMessageHeatingThermostat.cs" />
@@ -132,7 +138,7 @@
     <Compile Include="PropertySetter.cs" />
     <Compile Include="State\DateTimeUtils.cs" />
     <Compile Include="State\DeviceState.cs" />
-    <Compile Include="State\MaxCubeState.cs" />
+    <Compile Include="State\MaxCube.cs" />
     <Compile Include="State\MaxDayTemperatureProfile.cs" />
     <Compile Include="State\MaxDevice.cs" />
     <Compile Include="State\MaxDeviceType.cs" />

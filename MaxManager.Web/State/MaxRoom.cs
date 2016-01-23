@@ -66,7 +66,7 @@ namespace MaxManager.Web.State
 
 		public string GroupRfAddress { get; set; }
 
-		public MaxCubeState Cube { get; set; }
+		public MaxCube Cube { get; set; }
 
 		public List<float> GetSettableTemperatures()
 		{
