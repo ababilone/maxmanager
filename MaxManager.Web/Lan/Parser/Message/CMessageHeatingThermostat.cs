@@ -10,7 +10,7 @@ namespace MaxManager.Web.Lan.Parser.Message
 		public double MaxValeSetting { get; set; }
 		public TimeSpan DecalcificationTime { get; set; }
 		public DayOfWeek DecalcificationDay { get; set; }
-		public int BoostPercentage { get; set; }
+		public double BoostPercentage { get; set; }
 		public TimeSpan BoostDuration { get; set; }
 		public TimeSpan WindowOpenDuration { get; set; }
 		public double WindowOpenTemperature { get; set; }

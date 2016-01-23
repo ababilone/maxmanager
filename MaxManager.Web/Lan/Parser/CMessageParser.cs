@@ -65,20 +65,21 @@ namespace MaxManager.Web.Lan.Parser
 			var ecoTemperature = data[19] / 2.0;
 			var maxSetPointTemperature = data[20] / 2.0;
 			var minSetTemperature = data[21] / 2.0;
-			var temperatureOffset = data[22] / 2.0 + 3.5;
+			var temperatureOffset = data[22] / 2.0;
 			var windowOpenTemperature = data[23] / 2.0;
 			var windowOpenDuration = TimeSpan.FromMinutes(data[24] / 5.0);
-
+			
 			var boost = data[25];
-			var boostDuration = TimeSpan.FromMinutes((boost & 0xe0) / 5.0);
-			var boostPercentage = boost & 0x1f / 5;
+
+			var boostDuration = TimeSpan.FromMinutes((boost >> 5) * 5);
+			var boostPercentage = (boost & 0x1f) * 5.0 / 100;
 
 			var decalcification = data[26];
-			var decalcificationDay = GetDayOfWeek(decalcification & 0xe0);
-			var decalcificationTime = TimeSpan.FromHours(boost & 0x1f);
+			var decalcificationDay = GetDayOfWeek(decalcification >> 5);
+			var decalcificationTime = TimeSpan.FromHours(decalcification & 0x1f);
 
-			var maxValeSetting = data[27] / 255.0 * 100;
-			var valveOffset = data[28] / 255.0 * 100;
+			var maxValeSetting = data[27] * 100.0 / 255.0;
+			var valveOffset = data[28] * 100.0 / 255.0;
 
 			var weeklyProgram = data.Skip(28).ToArray();
 
@@ -163,8 +164,8 @@ namespace MaxManager.Web.Lan.Parser
 					if (setPoint == 0)
 						continue;
 
-					var temperature = (setPoint & 0xfe00) / 2.0;
-					var untilTime = TimeSpan.FromMinutes((setPoint & 0x1ff) / 5.0);
+					var temperature = (setPoint >> 9) / 2.0;
+					var untilTime = TimeSpan.FromMinutes((setPoint & 0x1ff) * 5.0);
 
 					var maxTemperatureProfilSwitchPoint = new MaxTemperatureProfilSwitchPoint
 					{
