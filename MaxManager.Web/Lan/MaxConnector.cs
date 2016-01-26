@@ -5,7 +5,6 @@ using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using MaxManager.Web.Lan.Merger;
 using MaxManager.Web.Lan.Parser;
-using MaxManager.Web.Lan.Parser.Message;
 using MaxManager.Web.State;
 
 namespace MaxManager.Web.Lan
@@ -16,7 +15,7 @@ namespace MaxManager.Web.Lan
 		private readonly int _port = 62910;
 		private readonly MaxParser _maxParser;
 		private readonly MaxMerger _maxMerger;
-		private MaxCube _maxCube;
+		private readonly MaxCube _maxCube;
 
 		public MaxConnector(string host, MaxParser maxParser, MaxMerger maxMerger)
 		{
@@ -40,8 +39,8 @@ namespace MaxManager.Web.Lan
 
 					while (true)
 					{
-						var count = await dataReader.LoadAsync(sizeof(char));
-						if (count != sizeof(char))
+						var count = await dataReader.LoadAsync(1);
+						if (count != 1)
 							return;
 
 						var readString = dataReader.ReadString(1);

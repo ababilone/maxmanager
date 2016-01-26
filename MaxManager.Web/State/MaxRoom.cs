@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MaxManager.Web.State
 {
@@ -14,53 +15,27 @@ namespace MaxManager.Web.State
 
 		public string Name { get; set; }
 
-		public int Order { get; set; }
+		public TimeSpan BoostDuration { get; set; }
 
-		public int BoostDuration { get; set; }
+		public double ComfortTemperature { get; set; }
 
-		public int BoostValveAngle { get; set; }
-
-		public float ComfortTemperature { get; set; }
-
-		public float EcoTemperature { get; set; }
+		public double EcoTemperature { get; set; }
 
 		public float MaximumTemperature { get; set; }
 
-		public float SetPointTemperature { get; set; }
-
-		public bool SetPointTemperatureValid { get; set; }
-
 		public string ControlMode { get; set; }
 
-		public string DecalcificationDay { get; set; }
-
-		public int DecalcificationHour { get; set; }
+		public DayOfWeek DecalcificationDay { get; set; }
 
 		public List<MaxDevice> Devices { get; set; }
 
-		public bool StateChanged { get; set; }
-
-		public bool StateDirty { get; set; }
-
-		public bool TemperatureControllable { get; set; }
-
 		public string TemperatureMode { get; set; }
-
-		public DateTime TemporaryModeStopDate { get; set; }
 
 		public MaxWeekTemperatureProfile WeekTemperatureProfile { get; set; }
 
-		public int WindowOpenDuration { get; set; }
+		public TimeSpan WindowOpenDuration { get; set; }
 
-		public float WindowOpenTemperature { get; set; }
-
-		public int MaximumNoOfHeatingThermostats { get; set; }
-
-		public int MaximumNoOfShutterContacts { get; set; }
-
-		public int MaximumNoOfWallMountedThermostats { get; set; }
-
-		public float CurrentAutoTemperature { get; set; }
+		public double WindowOpenTemperature { get; set; }
 
 		public float ActualTemperature { get; set; }
 
@@ -99,5 +74,23 @@ namespace MaxManager.Web.State
 		public bool IsControlModePermanently => ControlMode == "Permanently";
 
 		public bool IsControlModeTemporary => ControlMode == "Temporary";
+
+		public double TemperatureOffset => Devices.FirstOrDefault().TemperatureOffset;
+
+		public double ValveOffset { get; set; }
+
+		public string SerialNumber { get; set; }
+
+		public double MinSetTemperature { get; set; }
+
+		public double MaxValeSetting { get; set; }
+
+		public double MaxSetPointTemperature { get; set; }
+
+		public int FirmewareVersion { get; set; }
+
+		public TimeSpan DecalcificationTime { get; set; }
+
+		public double BoostPercentage { get; set; }
 	}
 }
