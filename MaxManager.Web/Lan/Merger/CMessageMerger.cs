@@ -24,7 +24,7 @@ namespace MaxManager.Web.Lan.Merger
 			}
 			else if (cMessageHeatingThermostat != null)
 			{
-				var maxDevice = maxCube.Rooms.SelectMany(room => room.Devices).FirstOrDefault(device => device.RfAddress == cMessageHeatingThermostat.AddressOfDevice);
+				var maxDevice = maxCube.Rooms.SelectMany(room => room.Devices).SingleOrDefault(device => device.RfAddress == cMessageHeatingThermostat.AddressOfDevice);
 				if (maxDevice != null)
 				{
 					maxDevice.BoostDuration = cMessageHeatingThermostat.BoostDuration;

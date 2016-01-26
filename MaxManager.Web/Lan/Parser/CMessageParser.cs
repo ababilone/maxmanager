@@ -66,12 +66,12 @@ namespace MaxManager.Web.Lan.Parser
 			var firmewareVersion = (int)data[6];
 			var testResult = (int)data[7];
 			var serialNumber = BitConverter.ToString(data, 8, 10);
-			var comfortTemperature = data[18] / 2.0;
-			var ecoTemperature = data[19] / 2.0;
-			var maxSetPointTemperature = data[20] / 2.0;
-			var minSetTemperature = data[21] / 2.0;
-			var temperatureOffset = data[22] / 2.0;
-			var windowOpenTemperature = data[23] / 2.0;
+			var comfortTemperature = data[18] * 2.0;
+			var ecoTemperature = data[19] * 2.0;
+			var maxSetPointTemperature = data[20] * 2.0;
+			var minSetTemperature = data[21] * 2.0;
+			var temperatureOffset = data[22] * 2.0 + 3.5;
+			var windowOpenTemperature = data[23] * 2.0;
 			var windowOpenDuration = TimeSpan.FromMinutes(data[24] / 5.0);
 
 			var boost = data[25];
@@ -126,10 +126,10 @@ namespace MaxManager.Web.Lan.Parser
 			var firmewareVersion = (int)data[6];
 			var testResult = (int)data[7];
 			var serialNumber = BitConverter.ToString(data, 8, 10);
-			var comfortTemperature = data[18] / 2.0;
-			var ecoTemperature = data[19] / 2.0;
-			var maxSetPointTemperature = data[20] / 2.0;
-			var minSetTemperature = data[21] / 2.0;
+			var comfortTemperature = data[18] * 2.0;
+			var ecoTemperature = data[19] * 2.0;
+			var maxSetPointTemperature = data[20] * 2.0;
+			var minSetTemperature = data[21] * 2.0;
 
 			var weeklyProgram = data.Skip(28).ToArray();
 
