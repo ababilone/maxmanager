@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using MaxManager.Web.Lan.Parser;
 
 namespace MaxManager.Web.State
 {
@@ -12,17 +14,10 @@ namespace MaxManager.Web.State
 
 		public string Name { get; set; }
 
-		public string RadioState { get; set; }
-
 		public DeviceState State { get; set; }
-
-		public string StateInfo { get; set; }
 
 		public MaxRoom Room { get; set; }
 
-		public bool IsRadioOk => IsRadioStateOk && !State.TransmitError;
-
-		public bool IsRadioStateOk => RadioState =="Ok";
 		public TimeSpan BoostDuration { get; set; }
 		public double BoostPercentage { get; set; }
 		public double ComfortTemperature { get; set; }
@@ -38,5 +33,23 @@ namespace MaxManager.Web.State
 		public double ValveOffset { get; set; }
 		public TimeSpan WindowOpenDuration { get; set; }
 		public double WindowOpenTemperature { get; set; }
+		public double SetPointTemperature { get; set; }
+		public MaxRoomControlMode RoomControlMode { get; set; }
+
+		public List<float> GetSettableTemperatures()
+		{
+			var ret = new List<float>();
+			var max = MaxSetPointTemperature;
+			for (var i = 5; i <= max; i++)
+			{
+				ret.Add(Convert.ToSingle(i));
+				var iPlus = i + 0.5f;
+				if (iPlus <= max && iPlus > 17)
+				{
+					ret.Add(Convert.ToSingle(iPlus));
+				}
+			}
+			return ret;
+		}
 	}
 }

@@ -13,13 +13,18 @@ namespace MaxManager.Web.Lan.Parser
 			{
 				new HMessageParser(),
 				new MMessageParser(),
-				new CMessageParser()
+				new CMessageParser(),
+				new LMessageParser()
 			};
 		}
 
 		public object Parse(string payload)
 		{
 			var messageParser = _messageParsers.FirstOrDefault(parser => parser.Accept(payload));
+			if (messageParser == null)
+			{
+				
+			}
 			return messageParser?.Parse(payload);
 		}
 	}
