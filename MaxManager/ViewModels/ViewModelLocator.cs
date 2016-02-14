@@ -2,7 +2,10 @@
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using MaxManager.Views;
+using MaxManager.Web.Lan;
 using MaxManager.Web.Lan.Discovery;
+using MaxManager.Web.Lan.Merger;
+using MaxManager.Web.Lan.Parser;
 using Microsoft.Practices.ServiceLocation;
 
 namespace MaxManager.ViewModels
@@ -19,11 +22,19 @@ namespace MaxManager.ViewModels
 			return navigationService;
 		}
 
+		private IMaxConnector CreateMaxConnector()
+		{
+			var maxParser = new MaxParser();
+			var maxMerger = new MaxMerger();
+			return new MaxConnector(maxParser, maxMerger);
+		}
+
 		public ViewModelLocator()
 		{
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
 			SimpleIoc.Default.Register(CreateNavigationService);
+			SimpleIoc.Default.Register(CreateMaxConnector);
 
 			if (ViewModelBase.IsInDesignModeStatic)
 			{
@@ -34,7 +45,7 @@ namespace MaxManager.ViewModels
 				//SimpleIoc.Default.Register<IDataService, DataService>();
 			}
 
-			SimpleIoc.Default.Register<MaxCubeDiscoverer>();
+			SimpleIoc.Default.Register<IMaxCubeDiscoverer, MaxCubeDiscoverer>();
 			SimpleIoc.Default.Register<DiscoverViewModel>();
 			SimpleIoc.Default.Register<MainViewModel>();
 		}

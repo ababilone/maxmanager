@@ -108,10 +108,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPropertySetter.cs" />
+    <Compile Include="Lan\Commands\MaxCommands.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventArgs.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventHandler.cs" />
     <Compile Include="Lan\Discovery\CubeInfo.cs" />
+    <Compile Include="Lan\Discovery\IMaxCubeDiscoverer.cs" />
     <Compile Include="Lan\Discovery\MaxCubeDiscoverer.cs" />
+    <Compile Include="Lan\Commands\IMaxCommand.cs" />
+    <Compile Include="Lan\IMaxConnector.cs" />
+    <Compile Include="Lan\Commands\LMaxCommand.cs" />
+    <Compile Include="Lan\MaxConnectionState.cs" />
     <Compile Include="Lan\Merger\CMessageMerger.cs" />
     <Compile Include="Lan\Merger\HMessageMerger.cs" />
     <Compile Include="Lan\Merger\IMessageMerger.cs" />
@@ -170,8 +176,17 @@
     <Compile Include="State\MaxWeekTemperatureProfile.cs" />
     <EmbeddedResource Include="Properties\MaxManager.Web.rd.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MaxManager.Web.Components\MaxManager.Web.Components.csproj">
+      <Project>{5D0CB410-FBA9-4375-8D54-56B5404DCB57}</Project>
+      <Name>MaxManager.Web.Components</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

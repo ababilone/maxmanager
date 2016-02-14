@@ -1,26 +1,27 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Views;
+using MaxManager.Model;
 using MaxManager.Web.Lan;
-using MaxManager.Web.Lan.Merger;
-using MaxManager.Web.Lan.Parser;
 using MaxManager.Web.State;
 
 namespace MaxManager.ViewModels
 {
 	public class MainViewModel : ViewModelBase, INavigable
 	{
+		private readonly IMaxConnector _maxConnector;
 		private readonly INavigationService _navigationService;
 
-		public MainViewModel(INavigationService navigationService)
+		public MainViewModel(IMaxConnector maxConnector, INavigationService navigationService)
 		{
+			_maxConnector = maxConnector;
 			_navigationService = navigationService;
 
-			ConnectCommand = new RelayCommand(Connect);
+			_maxConnector.StateUpdated += MaxConnectorOnStateUpdated;
+
+			//ConnectCommand = new RelayCommand(() => Connect());
 			Rooms = new ObservableCollection<MaxRoom>();
 		}
 
@@ -35,14 +36,9 @@ namespace MaxManager.ViewModels
 		}
 		private string _connectResult;
 
-		private async void Connect()
+		private async void Connect(CubeInfoWithHostName cubeInfoWithHostName)
 		{
-			var maxParser = new MaxParser();
-			var maxMerger = new MaxMerger();
-			var maxConnector = new MaxConnector("192.168.0.7", maxParser, maxMerger);
-			maxConnector.StateUpdated += MaxConnectorOnStateUpdated;
-			await maxConnector.LoadState();
-			ConnectResult = maxConnector.ToString();
+			await _maxConnector.Connect(cubeInfoWithHostName.HostName.ToString());
 		}
 
 		private void MaxConnectorOnStateUpdated(object sender, StateUpdatedEventArgs stateUpdatedEventArgs)
@@ -59,7 +55,11 @@ namespace MaxManager.ViewModels
 
 		public void Activate(object parameter)
 		{
-			Connect();
+			var cubeInfoWithHostName = parameter as CubeInfoWithHostName;
+			if (cubeInfoWithHostName != null)
+			{
+				Connect(cubeInfoWithHostName);
+			}
 		}
 
 		public void Deactivate(object parameter)

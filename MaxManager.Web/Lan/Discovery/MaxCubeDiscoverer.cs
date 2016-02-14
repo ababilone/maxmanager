@@ -1,8 +1,6 @@
 using System;
-using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Networking;
 using Windows.Networking.Sockets;
@@ -10,7 +8,7 @@ using Windows.Storage.Streams;
 
 namespace MaxManager.Web.Lan.Discovery
 {
-	public class MaxCubeDiscoverer
+	public class MaxCubeDiscoverer : IMaxCubeDiscoverer
 	{
 		private readonly DatagramSocket _datagramSocket;
 		private readonly int _discoveryPort = 23272;

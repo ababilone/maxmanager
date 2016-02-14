@@ -10,10 +10,14 @@ namespace MaxManager
 {
     sealed partial class App
     {
-        public App()
+	    private readonly MaxWorker _maxWorker;
+
+	    public App()
         {
             InitializeComponent();
             Suspending += OnSuspending;
+
+		    _maxWorker = new MaxWorker(TimeSpan.FromSeconds(15));
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
@@ -49,6 +53,8 @@ namespace MaxManager
             Window.Current.Activate();
 
 			DispatcherHelper.Initialize();
+
+			_maxWorker.Start();
 		}
 
 		void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
@@ -59,8 +65,11 @@ namespace MaxManager
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
-            deferral.Complete();
+
+			_maxWorker.Stop();
+
+			//TODO: Save application state and stop any background activity
+			deferral.Complete();
         }
     }
 }
