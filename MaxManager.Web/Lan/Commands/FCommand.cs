@@ -4,7 +4,7 @@
 	{
 		public FCommand()
 		{
-			Body = "f:";
+			Body = "f:\r\n";
 		}
 
 		public FCommand(string firstNtpServerHost, string secondNtpServerHost)

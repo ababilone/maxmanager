@@ -2,16 +2,16 @@
 
 namespace MaxManager.Web.Lan.Commands
 {
-	class NCommand : IMaxCommand
+	class NMaxCommand : IMaxCommand
 	{
-		public NCommand()
+		public NMaxCommand()
 		{
-			Body = "n:";
+			Body = "n:\r\n";
 		}
 
-		public NCommand(TimeSpan timeout)
+		public NMaxCommand(TimeSpan timeout)
 		{
-			Body = "n:" + timeout.TotalSeconds.ToString("{0:x}");
+			Body = "n:" + timeout.TotalSeconds.ToString("{0:x}") + "\r\n";
 		}
 
 		public string Body { get; }

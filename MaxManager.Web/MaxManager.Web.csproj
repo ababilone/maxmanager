@@ -111,6 +111,7 @@
     <Compile Include="Lan\Commands\FCommand.cs" />
     <Compile Include="Lan\Commands\MaxCommands.cs" />
     <Compile Include="Lan\Commands\NCommand.cs" />
+    <Compile Include="Lan\Commands\QCommand.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventArgs.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventHandler.cs" />
     <Compile Include="Lan\Discovery\CubeInfo.cs" />
