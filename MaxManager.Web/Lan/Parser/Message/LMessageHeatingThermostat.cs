@@ -7,5 +7,11 @@ namespace MaxManager.Web.Lan.Parser.Message
 		public bool IsTransmitError { get; set; }
 		public MaxRoomControlMode RoomControlMode { get; set; }
 		public double SetPointTemperature { get; set; }
+
+		public override string ToString()
+		{
+			return
+				$"{DeviceType}: Temperature: {SetPointTemperature} Mode: {RoomControlMode}, Is Transmit Error: {IsTransmitError}, Is Battery Low: {IsBatteryLow}, Is Daylight Saving: {IsDaylightSaving}";
+		}
 	}
 }

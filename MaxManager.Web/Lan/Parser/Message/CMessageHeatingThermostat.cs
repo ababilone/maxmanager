@@ -25,5 +25,10 @@ namespace MaxManager.Web.Lan.Parser.Message
 		public int RoomId { get; set; }
 		public string AddressOfDevice { get; set; }
 		public int DataLength { get; set; }
+
+		public override string ToString()
+		{
+			return $"{DeviceType} ({RfAddress}), Min °: {MinSetTemperature} Max °: {MaxSetPointTemperature} Eco °: {EcoTemperature} Comfort°: {ComfortTemperature}, Boost duration: {BoostDuration}, Decalcification on {DecalcificationDay} @ {DecalcificationTime}";
+		}
 	}
 }

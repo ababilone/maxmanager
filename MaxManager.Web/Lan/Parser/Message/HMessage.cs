@@ -14,5 +14,10 @@ namespace MaxManager.Web.Lan.Parser.Message
 		public string FreeMemorySlots { get; set; }
 		public string DutyCycle { get; set; }
 		public string HttpConnectionId { get; set; }
+
+		public override string ToString()
+		{
+			return string.Format("Cube {0} (Firmware: {1}, Radio address: {2})", SerialNumber, FirmwareVersion, RfAddress);
+		}
 	}
 }

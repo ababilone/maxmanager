@@ -7,5 +7,10 @@ namespace MaxManager.Web.Lan.Parser.Message
 	{
 		public List<MaxRoom> Rooms { get; set; }
 		public List<MaxDevice> Devices { get; set; }
+
+		public override string ToString()
+		{
+			return Rooms.Count + " rooms (" + Devices.Count + " devices)";
+		}
 	}
 }

@@ -6,5 +6,13 @@ namespace MaxManager.Web.Lan.Parser.Message
 		public string PortalUrl { get; set; }
 		public byte[] TimeZoneWinter { get; set; }
 		public byte[] TimeZoneDaylightSavings { get; set; }
+
+		public override string ToString()
+		{
+			if (!IsPortalEnabled)
+				return "Web portal disabled";
+
+			return "Web portal url: " + PortalUrl;
+		}
 	}
 }
