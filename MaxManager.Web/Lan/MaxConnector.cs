@@ -39,6 +39,7 @@ namespace MaxManager.Web.Lan
 		public event MessageReceivedEventHandler MessageReceived;
 		public event CommandSentEventHandler CommandSent;
 		public event ConnectedEventHandler Connected;
+		public event ExceptionThrowedEventHandler ExceptionThrowed;
 
 		public MaxConnectionState ConnectionState { get; }
 
@@ -88,8 +89,8 @@ namespace MaxManager.Web.Lan
 			//_streamSocket.TransferOwnership(SocketId);
 		}
 
-		private string currentLine = string.Empty;
-		private readonly List<string> previousLines = new List<string>();
+		private string _currentLine = string.Empty;
+		private readonly List<string> _previousLines = new List<string>();
 
 		public async Task Process()
 		{
@@ -98,8 +99,6 @@ namespace MaxManager.Web.Lan
 
 			using (var dataReader = new DataReader(_streamSocket.InputStream))
 			{
-				//var currentLine = string.Empty;
-				
 				while (true)
 				{
 					try
@@ -111,11 +110,11 @@ namespace MaxManager.Web.Lan
 						var readString = dataReader.ReadString(1);
 						if (readString != "\n")
 						{
-							currentLine += readString;
+							_currentLine += readString;
 						}
 						else
 						{
-							var message = _maxParser.Parse(currentLine);
+							var message = _maxParser.Parse(_currentLine);
 
 							if (message != null)
 								MessageReceived?.Invoke(this, new MessageReceivedEventArgs { When = DateTime.Now, MaxMessage = message });
@@ -128,14 +127,14 @@ namespace MaxManager.Web.Lan
 							};
 							StateUpdated?.Invoke(this, stateUpdatedEventArgs);
 
-							previousLines.Add(currentLine);
-							currentLine = string.Empty;
+							_previousLines.Add(_currentLine);
+							_currentLine = string.Empty;
 							await Task.Delay(50);
 						}
 					}
 					catch (Exception e)
 					{
-
+						ExceptionThrowed?.Invoke(this, new ExceptionThrowedEventArgs { Exception = e });
 					}
 				}
 			}
@@ -157,7 +156,7 @@ namespace MaxManager.Web.Lan
 			}
 			catch (Exception e)
 			{
-
+				ExceptionThrowed?.Invoke(this, new ExceptionThrowedEventArgs { Exception = e });
 			}
 
 			CommandSent?.Invoke(this, new CommandSentEventArgs { When = DateTime.Now, MaxCommand = maxCommand });

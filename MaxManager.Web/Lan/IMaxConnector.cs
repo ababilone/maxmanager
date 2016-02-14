@@ -10,12 +10,12 @@ namespace MaxManager.Web.Lan
 		event StateUpdatedEventHandler StateUpdated;
 
 		Task Connect(string host);
-
 		Task Process();
 		Task Send(IMaxCommand maxCommand);
 
 		event MessageReceivedEventHandler MessageReceived;
 		event CommandSentEventHandler CommandSent;
 		event ConnectedEventHandler Connected;
+		event ExceptionThrowedEventHandler ExceptionThrowed;
 	}
 }

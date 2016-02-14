@@ -30,7 +30,8 @@ namespace MaxManager.ViewModels
 			_maxConnector.StateUpdated += MaxConnectorOnStateUpdated;
 			_maxConnector.MessageReceived += (sender, args) => AddMaxEvent(new MaxEvent("< " + args.MaxMessage.ToString()));
 			_maxConnector.CommandSent += (sender, args) => AddMaxEvent(new MaxEvent("> "+  args.MaxCommand.ToString()));
-			_maxConnector.Connected += (sender, args) => AddMaxEvent(new MaxEvent("- Connected to " + args.Host));
+			_maxConnector.Connected += (sender, args) => AddMaxEvent(new MaxEvent("@ Connected to " + args.Host));
+			_maxConnector.ExceptionThrowed += (sender, args) => AddMaxEvent(new MaxEvent("@ Exception throwed: " + args.Exception.Message));
 		}
 
 		public ICommand ConnectCommand { get; set; }

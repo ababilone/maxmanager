@@ -119,6 +119,8 @@
     <Compile Include="Lan\Events\CommandSentEventHandler.cs" />
     <Compile Include="Lan\Events\ConnectedEventArgs.cs" />
     <Compile Include="Lan\Events\ConnectedEventHandler.cs" />
+    <Compile Include="Lan\Events\ExceptionThrowedEventArgs.cs" />
+    <Compile Include="Lan\Events\ExceptionThrowedEventHandler.cs" />
     <Compile Include="Lan\IMaxConnector.cs" />
     <Compile Include="Lan\Commands\LMaxCommand.cs" />
     <Compile Include="Lan\MaxConnectionState.cs" />
