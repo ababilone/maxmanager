@@ -10,7 +10,7 @@ namespace MaxManager.Web.Lan.Parser
 			return payload.StartsWith("H:");
 		}
 
-		public object Parse(string payload)
+		public IMaxMessage Parse(string payload)
 		{
 			var tokenizer = payload.Substring(2).Split(',');
 			var serialNumber = tokenizer[0];

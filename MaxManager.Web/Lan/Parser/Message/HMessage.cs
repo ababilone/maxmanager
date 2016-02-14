@@ -2,7 +2,7 @@ using System;
 
 namespace MaxManager.Web.Lan.Parser.Message
 {
-	public class HMessage
+	public class HMessage : IMaxMessage
 	{
 		public string SerialNumber { get; set; }
 		public string RfAddress { get; set; }

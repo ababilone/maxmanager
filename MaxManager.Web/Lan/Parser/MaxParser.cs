@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using MaxManager.Web.Lan.Parser.Message;
 
 namespace MaxManager.Web.Lan.Parser
 {
@@ -18,7 +19,7 @@ namespace MaxManager.Web.Lan.Parser
 			};
 		}
 
-		public object Parse(string payload)
+		public IMaxMessage Parse(string payload)
 		{
 			var messageParser = _messageParsers.FirstOrDefault(parser => parser.Accept(payload));
 			if (messageParser == null)

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Windows.System.Threading;
 using GalaSoft.MvvmLight.Ioc;
 using MaxManager.Web.Lan;
@@ -18,22 +19,23 @@ namespace MaxManager
 
 		public void Start()
 		{
-			ProcessMaxMessages();
-
 			if (_threadPoolTimer == null)
 				_threadPoolTimer = ThreadPoolTimer.CreatePeriodicTimer(Handler, _interval, Destroyed);
 		}
 
 		private void Handler(ThreadPoolTimer timer)
 		{
-			ProcessMaxMessages();
+			Task.Run(ProcessMaxMessages);
 		}
 
-		private static void ProcessMaxMessages()
+		private static async Task ProcessMaxMessages()
 		{
 			var maxConnector = SimpleIoc.Default.GetInstance<IMaxConnector>();
-			maxConnector?.Process();
-			maxConnector?.Send(MaxCommands.L);
+			if (maxConnector == null)
+				return;
+
+			await maxConnector.Send(MaxCommands.L);
+			await maxConnector.Process();
 		}
 
 		private void Destroyed(ThreadPoolTimer timer)

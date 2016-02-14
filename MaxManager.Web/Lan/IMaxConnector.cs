@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using MaxManager.Web.Lan.Commands;
+using MaxManager.Web.Lan.Events;
 
 namespace MaxManager.Web.Lan
 {
@@ -12,5 +13,9 @@ namespace MaxManager.Web.Lan
 
 		Task Process();
 		Task Send(IMaxCommand maxCommand);
+
+		event MessageReceivedEventHandler MessageReceived;
+		event CommandSentEventHandler CommandSent;
+		event ConnectedEventHandler Connected;
 	}
 }

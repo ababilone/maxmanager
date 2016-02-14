@@ -14,7 +14,7 @@ namespace MaxManager.Web.Lan.Parser
 			return payload.StartsWith("M:");
 		}
 
-		public object Parse(string payload)
+		public IMaxMessage Parse(string payload)
 		{
 			var tokenizer = payload.Substring(2).Split(',');
 			var index = tokenizer[0];

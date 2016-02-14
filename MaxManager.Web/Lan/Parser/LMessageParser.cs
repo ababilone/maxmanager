@@ -28,7 +28,7 @@ namespace MaxManager.Web.Lan.Parser
 			return payload.StartsWith("L:");
 		}
 
-		public object Parse(string payload)
+		public IMaxMessage Parse(string payload)
 		{
 			var dataAsString = payload.Substring(2);
 			var data = Convert.FromBase64String(dataAsString);

@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="MaxWorker.cs" />
     <Compile Include="Model\CubeInfoWithHostName.cs" />
+    <Compile Include="Model\MaxEvent.cs" />
     <Compile Include="Views\MaxHeader.xaml.cs">
       <DependentUpon>MaxHeader.xaml</DependentUpon>
     </Compile>

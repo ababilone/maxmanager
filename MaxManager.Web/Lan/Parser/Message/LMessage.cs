@@ -2,7 +2,7 @@ using MaxManager.Web.State;
 
 namespace MaxManager.Web.Lan.Parser.Message
 {
-	public class LMessage
+	public class LMessage : IMaxMessage
 	{
 		public MaxDeviceType DeviceType { get; set; }
 		public string RfAddress { get; set; }

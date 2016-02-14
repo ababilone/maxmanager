@@ -7,6 +7,7 @@ using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using MaxManager.Web.Components;
 using MaxManager.Web.Lan.Commands;
+using MaxManager.Web.Lan.Events;
 using MaxManager.Web.Lan.Merger;
 using MaxManager.Web.Lan.Parser;
 using MaxManager.Web.State;
@@ -35,6 +36,9 @@ namespace MaxManager.Web.Lan
 		}
 
 		public event StateUpdatedEventHandler StateUpdated;
+		public event MessageReceivedEventHandler MessageReceived;
+		public event CommandSentEventHandler CommandSent;
+		public event ConnectedEventHandler Connected;
 
 		public MaxConnectionState ConnectionState { get; }
 
@@ -77,12 +81,15 @@ namespace MaxManager.Web.Lan
 			CreateStreamSocket();
 
 			await _streamSocket.ConnectAsync(new HostName(host), _port.ToString(), SocketProtectionLevel.PlainSocket);
+
+			Connected?.Invoke(this, new ConnectedEventArgs { Host = host });
+
 			await Process();
 			//_streamSocket.TransferOwnership(SocketId);
 		}
 
 		private string currentLine = string.Empty;
-		private List<string> previousLines = new List<string>(); 
+		private readonly List<string> previousLines = new List<string>();
 
 		public async Task Process()
 		{
@@ -92,7 +99,7 @@ namespace MaxManager.Web.Lan
 			using (var dataReader = new DataReader(_streamSocket.InputStream))
 			{
 				//var currentLine = string.Empty;
-
+				
 				while (true)
 				{
 					try
@@ -109,6 +116,10 @@ namespace MaxManager.Web.Lan
 						else
 						{
 							var message = _maxParser.Parse(currentLine);
+
+							if (message != null)
+								MessageReceived?.Invoke(this, new MessageReceivedEventArgs { When = DateTime.Now, MaxMessage = message });
+
 							_maxMerger.Merge(_maxCube, message);
 
 							var stateUpdatedEventArgs = new StateUpdatedEventArgs
@@ -124,7 +135,7 @@ namespace MaxManager.Web.Lan
 					}
 					catch (Exception e)
 					{
-						
+
 					}
 				}
 			}
@@ -132,11 +143,24 @@ namespace MaxManager.Web.Lan
 
 		public async Task Send(IMaxCommand maxCommand)
 		{
-			using (var dataWriter = new DataWriter(_streamSocket.OutputStream))
+			if (_streamSocket == null)
+				return;
+
+			try
 			{
-				dataWriter.WriteString(maxCommand.Body);
-				await dataWriter.StoreAsync();
+				using (var dataWriter = new DataWriter(_streamSocket.OutputStream))
+				{
+					dataWriter.WriteString(maxCommand.Body);
+					await dataWriter.StoreAsync();
+					dataWriter.DetachStream();
+				}
 			}
+			catch (Exception e)
+			{
+
+			}
+
+			CommandSent?.Invoke(this, new CommandSentEventArgs { When = DateTime.Now, MaxCommand = maxCommand });
 
 			await Process();
 		}

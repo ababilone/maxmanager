@@ -12,7 +12,7 @@ namespace MaxManager.Web.Lan.Parser
 			return payload.StartsWith("C:");
 		}
 
-		public object Parse(string payload)
+		public IMaxMessage Parse(string payload)
 		{
 			var address = payload.Substring(2).Split(',')[0];
 			var rfAddress = FormatRfAddress(address);

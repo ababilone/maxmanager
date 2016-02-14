@@ -9,33 +9,52 @@
     DataContext="{Binding Main,Source={StaticResource Locator}}"
     >
     <views:MaxHeader>
-        <GridView ItemsSource="{Binding Rooms}">
-            <GridView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Width="300" Height="200" BorderBrush="LightGray" BorderThickness="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Border Background="LightGray" Margin="10">
-                            <TextBlock Text="{Binding Name}" Foreground="White" FontSize="20" Margin="5" />
-                        </Border>
-                        <TextBox Grid.Row="1" FontSize="36" Text="{Binding SetPointTemperature, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
-                        <Grid Grid.Row="2" Margin="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Mode" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" />
-                            <Button Grid.Column="2" Content="Auto" Background="#ec6d23" Foreground="White" Margin="5" />
-                            <Button Grid.Column="3" Content="Manual" Background="LightGray" Foreground="White" Margin="5" />
+        <Grid>
+            <GridView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Rooms}">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="300" Height="200" BorderBrush="LightGray" BorderThickness="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Border Background="LightGray" Margin="10">
+                                <TextBlock Text="{Binding Name}" Foreground="White" FontSize="20" Margin="5" />
+                            </Border>
+                            <TextBox Grid.Row="1" FontSize="36" Text="{Binding SetPointTemperature, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+                            <Grid Grid.Row="2" Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Mode" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" />
+                                <Button Grid.Column="2" Content="Auto" Background="#ec6d23" Foreground="White" Margin="5" />
+                                <Button Grid.Column="3" Content="Manual" Background="LightGray" Foreground="White" Margin="5" />
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <ItemsControl HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="500" ItemsSource="{Binding MaxEvents}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding When}" FontWeight="Bold" />
+                                <TextBlock Text="{Binding Message}" Margin="5,0,0,0" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Grid>
     </views:MaxHeader>
 </views:BindablePage>

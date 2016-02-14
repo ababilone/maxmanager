@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MaxManager.Web.State;
 
-namespace MaxManager.Web.Lan
+namespace MaxManager.Web.Lan.Events
 {
 	public class StateUpdatedEventArgs
 	{
