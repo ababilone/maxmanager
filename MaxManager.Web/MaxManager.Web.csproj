@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPropertySetter.cs" />
+    <Compile Include="Lan\Commands\FCommand.cs" />
     <Compile Include="Lan\Commands\MaxCommands.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventArgs.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventHandler.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Lan\Merger\MMessageMerger.cs" />
     <Compile Include="Lan\Events\MessageReceivedEventArgs.cs" />
     <Compile Include="Lan\Events\MessageReceivedEventHandler.cs" />
+    <Compile Include="Lan\Parser\FMessageParser.cs" />
     <Compile Include="Lan\Parser\ILSubMessageParser.cs" />
     <Compile Include="Lan\Parser\LEcoButtonSubMessageParser.cs" />
     <Compile Include="Lan\Parser\LHeatingThermostatSubMessageParser.cs" />
@@ -145,6 +147,7 @@
     <Compile Include="Lan\Parser\Message\CMessageHeatingThermostat.cs" />
     <Compile Include="Lan\Parser\CMessageParser.cs" />
     <Compile Include="Lan\Parser\Message\CMessageWallThermostat.cs" />
+    <Compile Include="Lan\Parser\Message\FMessage.cs" />
     <Compile Include="Lan\Parser\Message\HMessage.cs" />
     <Compile Include="Lan\Parser\HMessageParser.cs" />
     <Compile Include="Lan\Parser\IMessageParser.cs" />
