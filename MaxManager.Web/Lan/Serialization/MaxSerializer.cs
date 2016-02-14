@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
+using System.Text;
+using MaxManager.Web.State;
 
 namespace MaxManager.Web.Lan.Serialization
 {
@@ -7,7 +10,7 @@ namespace MaxManager.Web.Lan.Serialization
 	{
 		public T Deserialize<T>(byte[] state) where T : class
 		{
-			var type = typeof (T);
+			var type = typeof(T);
 			var propertyInfos = type.GetProperties();
 
 			var instance = Activator.CreateInstance<T>();
@@ -27,7 +30,7 @@ namespace MaxManager.Web.Lan.Serialization
 
 		private object Deserialize(byte[] state, MaxSerializationAttribute maxSerializationAttribute)
 		{
-			var bytePos = maxSerializationAttribute.BytePos-1;
+			var bytePos = maxSerializationAttribute.BytePos - 1;
 			var bitPos = maxSerializationAttribute.BitPos;
 			var returnType = maxSerializationAttribute.ReturnType;
 			var bitSpan = maxSerializationAttribute.BitSpan;
@@ -37,6 +40,22 @@ namespace MaxManager.Web.Lan.Serialization
 			var mask = (1 << bitSpan) - 1;
 
 			var result = value2 & mask;
+
+			if (returnType == typeof(string))
+			{
+				var charCount = bitSpan / 8;
+				return Encoding.UTF8.GetString(state, bytePos, charCount);
+			}
+
+			if (returnType == typeof (MaxRfAddress))
+			{
+				var byteCount = bitSpan / 8;
+				return new MaxRfAddress
+				{
+					HumanReadable = BitConverter.ToString(state, bytePos, byteCount),
+					Bytes = state.Skip(bytePos).Take(byteCount).ToArray()
+				};
+			}
 
 			if (returnType == typeof(bool))
 			{
@@ -59,6 +78,12 @@ namespace MaxManager.Web.Lan.Serialization
 			if (returnType == typeof(int))
 			{
 				return Convert.ToInt32(result);
+			}
+
+			if (returnType.GetTypeInfo().IsEnum)
+			{
+				var intValue = Convert.ToInt32(result);
+				return Enum.ToObject(returnType, intValue);
 			}
 
 			return null;

@@ -110,6 +110,7 @@
     <Compile Include="IPropertySetter.cs" />
     <Compile Include="Lan\Commands\FCommand.cs" />
     <Compile Include="Lan\Commands\MaxCommands.cs" />
+    <Compile Include="Lan\Commands\NCommand.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventArgs.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventHandler.cs" />
     <Compile Include="Lan\Discovery\CubeInfo.cs" />
@@ -161,7 +162,9 @@
     <Compile Include="Lan\Parser\Message\LMessages.cs" />
     <Compile Include="Lan\Parser\Message\LMessageWallThermostat.cs" />
     <Compile Include="Lan\Parser\Message\MMessage.cs" />
+    <Compile Include="Lan\Parser\Message\NMessage.cs" />
     <Compile Include="Lan\Parser\MMessageParser.cs" />
+    <Compile Include="Lan\Parser\NMessageParser.cs" />
     <Compile Include="Lan\Serialization\HeatingThermostatDeviceState.cs" />
     <Compile Include="Lan\Serialization\MaxSerializationAttribute.cs" />
     <Compile Include="Lan\Serialization\ShutterContactDeviceState.cs" />
@@ -183,6 +186,7 @@
     <Compile Include="State\MaxPushButtonConfiguration.cs" />
     <Compile Include="State\MaxPushButtonDeviceState.cs" />
     <Compile Include="State\MaxPushButtonKeyConfiguration.cs" />
+    <Compile Include="State\MaxRfAddress.cs" />
     <Compile Include="State\MaxRoom.cs" />
     <Compile Include="State\MaxShutterContactDeviceState.cs" />
     <Compile Include="State\MaxTemperatureProfilSwitchPoint.cs" />
