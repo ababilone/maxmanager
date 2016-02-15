@@ -1,13 +1,13 @@
 ﻿namespace MaxManager.Web.Lan.Commands
 {
-	class FCommand : IMaxCommand
+	class FMaxCommand : IMaxCommand
 	{
-		public FCommand()
+		public FMaxCommand()
 		{
 			Body = "f:\r\n";
 		}
 
-		public FCommand(string firstNtpServerHost, string secondNtpServerHost)
+		public FMaxCommand(string firstNtpServerHost, string secondNtpServerHost)
 		{
 			Body = $"f:{firstNtpServerHost},{secondNtpServerHost}";
 		}

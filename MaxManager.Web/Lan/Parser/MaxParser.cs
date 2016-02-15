@@ -12,11 +12,13 @@ namespace MaxManager.Web.Lan.Parser
 		{
 			_messageParsers = new List<IMessageParser>
 			{
+				new AMessageParser(),
 				new HMessageParser(),
 				new MMessageParser(),
 				new CMessageParser(),
 				new LMessageParser(),
-				new FMessageParser()
+				new FMessageParser(),
+				new NMessageParser()
 			};
 		}
 
