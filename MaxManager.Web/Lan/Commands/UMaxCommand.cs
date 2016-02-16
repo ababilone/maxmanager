@@ -1,6 +1,6 @@
 ﻿namespace MaxManager.Web.Lan.Commands
 {
-	class UMaxCommand : IMaxCommand
+	public class UMaxCommand : IMaxCommand
 	{
 		public UMaxCommand(string portalUrl)
 		{

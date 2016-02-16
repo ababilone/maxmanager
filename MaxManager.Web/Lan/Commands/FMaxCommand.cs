@@ -1,6 +1,6 @@
 ﻿namespace MaxManager.Web.Lan.Commands
 {
-	class FMaxCommand : IMaxCommand
+	public class FMaxCommand : IMaxCommand
 	{
 		public FMaxCommand()
 		{

@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\SetModeCommand.cs" />
     <Compile Include="MaxWorker.cs" />
     <Compile Include="Model\CubeInfoWithHostName.cs" />
     <Compile Include="Model\MaxEvent.cs" />

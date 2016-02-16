@@ -113,6 +113,8 @@
     <Compile Include="Lan\Commands\MaxCommands.cs" />
     <Compile Include="Lan\Commands\NMaxCommand.cs" />
     <Compile Include="Lan\Commands\QMaxCommand.cs" />
+    <Compile Include="Lan\Commands\SMaxCommand.cs" />
+    <Compile Include="Lan\Commands\SMaxCommandFactory.cs" />
     <Compile Include="Lan\Commands\UMaxCommand.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventArgs.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventHandler.cs" />

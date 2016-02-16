@@ -2,7 +2,7 @@
 
 namespace MaxManager.Web.Lan.Commands
 {
-	class NMaxCommand : IMaxCommand
+	public class NMaxCommand : IMaxCommand
 	{
 		public NMaxCommand()
 		{
