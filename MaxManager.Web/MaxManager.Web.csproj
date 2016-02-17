@@ -179,7 +179,11 @@
     <Compile Include="Lan\Events\StateUpdatedEventArgs.cs" />
     <Compile Include="Lan\Events\StateUpdatedEventHandler.cs" />
     <Compile Include="Lan\Serialization\MaxSerializer.cs" />
+    <Compile Include="Lan\Serialization\TypeSerializer\DateTimeTypeSerializer.cs" />
+    <Compile Include="Lan\Serialization\TypeSerializer\IntegerTypeSerializer.cs" />
     <Compile Include="Lan\Serialization\TypeSerializer\ITypeSerializer.cs" />
+    <Compile Include="Lan\Serialization\TypeSerializer\MaxRfAddressTypeSerializer.cs" />
+    <Compile Include="Lan\Serialization\TypeSerializer\TimeSpanTypeSerializer.cs" />
     <Compile Include="ListPropertySetter.cs" />
     <Compile Include="ParseException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

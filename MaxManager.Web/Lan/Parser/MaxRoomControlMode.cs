@@ -1,6 +1,6 @@
 namespace MaxManager.Web.Lan.Parser
 {
-	public enum MaxRoomControlMode
+	public enum MaxRoomControlMode : short
 	{
 		Auto = 0,
 		Manual = 1,

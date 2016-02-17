@@ -15,7 +15,13 @@ namespace MaxManager.Web.Lan.Serialization
 
 		public MaxSerializer()
 		{
-			_typeSerializers = new List<ITypeSerializer>();
+			_typeSerializers = new List<ITypeSerializer>
+			{
+				new IntegerTypeSerializer(),
+				new MaxRfAddressTypeSerializer(),
+				new DateTimeTypeSerializer(),
+				new TimeSpanTypeSerializer()
+			};
 		}
 
 		public T Deserialize<T>(byte[] state) where T : class
@@ -113,17 +119,19 @@ namespace MaxManager.Web.Lan.Serialization
 					continue;
 
 				var value = propertyInfo.GetValue(maxCommand);
-				Serialize(value, maxSerializationAttribute, byteWriter);
+				Serialize(value, propertyInfo.PropertyType, maxSerializationAttribute, byteWriter);
 			}
 
 			return byteWriter.ToBytes();
 		}
 
-		private void Serialize(object value, MaxSerializationAttribute maxSerializationAttribute, ByteWriter byteWriter)
+		private void Serialize(object value, Type objectType, MaxSerializationAttribute maxSerializationAttribute, ByteWriter byteWriter)
 		{
-			var typeSerializer = _typeSerializers.SingleOrDefault(serializer => serializer.Accept(maxSerializationAttribute));
+			var typeSerializer = _typeSerializers.SingleOrDefault(serializer => serializer.Accept(objectType));
 			if (typeSerializer == null)
 				throw new Exception("No TypeSerializer for " + maxSerializationAttribute.ReturnType);
+
+			typeSerializer.Serialize(value, objectType, maxSerializationAttribute, byteWriter);
 		}
 	}
 }
