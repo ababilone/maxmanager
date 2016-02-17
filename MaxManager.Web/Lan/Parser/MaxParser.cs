@@ -18,7 +18,8 @@ namespace MaxManager.Web.Lan.Parser
 				new CMessageParser(),
 				new LMessageParser(),
 				new FMessageParser(),
-				new NMessageParser()
+				new NMessageParser(),
+				new SMessageParser()
 			};
 		}
 

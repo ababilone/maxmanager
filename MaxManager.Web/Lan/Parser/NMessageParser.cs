@@ -6,7 +6,7 @@ namespace MaxManager.Web.Lan.Parser
 {
 	public class NMessageParser : IMessageParser
 	{
-		private MaxSerializer _maxSerializer;
+		private readonly MaxSerializer _maxSerializer;
 
 		public NMessageParser()
 		{

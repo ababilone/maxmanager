@@ -115,6 +115,7 @@
     <Compile Include="Lan\Commands\QMaxCommand.cs" />
     <Compile Include="Lan\Commands\SMaxCommand.cs" />
     <Compile Include="Lan\Commands\SMaxCommandFactory.cs" />
+    <Compile Include="Lan\Commands\STemperatureAndModeMaxCommand.cs" />
     <Compile Include="Lan\Commands\UMaxCommand.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventArgs.cs" />
     <Compile Include="Lan\Discovery\CubeDiscoveredEventHandler.cs" />
@@ -170,8 +171,10 @@
     <Compile Include="Lan\Parser\Message\LMessageWallThermostat.cs" />
     <Compile Include="Lan\Parser\Message\MMessage.cs" />
     <Compile Include="Lan\Parser\Message\NMessage.cs" />
+    <Compile Include="Lan\Parser\Message\SMessage.cs" />
     <Compile Include="Lan\Parser\MMessageParser.cs" />
     <Compile Include="Lan\Parser\NMessageParser.cs" />
+    <Compile Include="Lan\Parser\SMessageParser.cs" />
     <Compile Include="Lan\Serialization\ByteWriter.cs" />
     <Compile Include="Lan\Serialization\HeatingThermostatDeviceState.cs" />
     <Compile Include="Lan\Serialization\MaxSerializationAttribute.cs" />
