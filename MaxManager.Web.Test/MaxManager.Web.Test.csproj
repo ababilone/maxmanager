@@ -95,6 +95,7 @@
     <SDKReference Include="TestPlatform.Universal, Version=$(UnitTestPlatformVersion)" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Lan\Commands\SMaxCommandSerializationTest.cs" />
     <Compile Include="Lan\Parser\CMessageParserTest.cs" />
     <Compile Include="Lan\Parser\HMessageParserTest.cs" />
     <Compile Include="Lan\Parser\MMessageParserTest.cs" />

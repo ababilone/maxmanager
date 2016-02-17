@@ -24,7 +24,7 @@ namespace MaxManager.Commands
 			if (parameter == null)
 				return;
 
-			var maxCommand = new SMaxCommandFactory().CreateTemperatureAndModeCommand("", 0);
+			var maxCommand = new SMaxCommandFactory().CreateTemperatureAndModeCommand(null, 0);
 			//await _maxConnector.Send(maxCommand);
 		}
 

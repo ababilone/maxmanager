@@ -172,12 +172,14 @@
     <Compile Include="Lan\Parser\Message\NMessage.cs" />
     <Compile Include="Lan\Parser\MMessageParser.cs" />
     <Compile Include="Lan\Parser\NMessageParser.cs" />
+    <Compile Include="Lan\Serialization\ByteWriter.cs" />
     <Compile Include="Lan\Serialization\HeatingThermostatDeviceState.cs" />
     <Compile Include="Lan\Serialization\MaxSerializationAttribute.cs" />
     <Compile Include="Lan\Serialization\ShutterContactDeviceState.cs" />
     <Compile Include="Lan\Events\StateUpdatedEventArgs.cs" />
     <Compile Include="Lan\Events\StateUpdatedEventHandler.cs" />
     <Compile Include="Lan\Serialization\MaxSerializer.cs" />
+    <Compile Include="Lan\Serialization\TypeSerializer\ITypeSerializer.cs" />
     <Compile Include="ListPropertySetter.cs" />
     <Compile Include="ParseException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

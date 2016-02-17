@@ -1,13 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using MaxManager.Web.Lan.Commands;
+using MaxManager.Web.Lan.Serialization.TypeSerializer;
 using MaxManager.Web.State;
 
 namespace MaxManager.Web.Lan.Serialization
 {
 	public class MaxSerializer
 	{
+		private readonly List<ITypeSerializer> _typeSerializers;
+
+		public MaxSerializer()
+		{
+			_typeSerializers = new List<ITypeSerializer>();
+		}
+
 		public T Deserialize<T>(byte[] state) where T : class
 		{
 			var type = typeof(T);
@@ -47,7 +57,7 @@ namespace MaxManager.Web.Lan.Serialization
 				return Encoding.UTF8.GetString(state, bytePos, charCount);
 			}
 
-			if (returnType == typeof (MaxRfAddress))
+			if (returnType == typeof(MaxRfAddress))
 			{
 				var byteCount = bitSpan / 8;
 				return new MaxRfAddress
@@ -87,6 +97,33 @@ namespace MaxManager.Web.Lan.Serialization
 			}
 
 			return null;
+		}
+
+		public byte[] Serialize<T>(T maxCommand) where T : IMaxCommand
+		{
+			var type = typeof(T);
+			var propertyInfos = type.GetProperties();
+
+			var byteWriter = new ByteWriter();
+
+			foreach (var propertyInfo in propertyInfos)
+			{
+				var maxSerializationAttribute = propertyInfo.GetCustomAttribute<MaxSerializationAttribute>();
+				if (maxSerializationAttribute == null)
+					continue;
+
+				var value = propertyInfo.GetValue(maxCommand);
+				Serialize(value, maxSerializationAttribute, byteWriter);
+			}
+
+			return byteWriter.ToBytes();
+		}
+
+		private void Serialize(object value, MaxSerializationAttribute maxSerializationAttribute, ByteWriter byteWriter)
+		{
+			var typeSerializer = _typeSerializers.SingleOrDefault(serializer => serializer.Accept(maxSerializationAttribute));
+			if (typeSerializer == null)
+				throw new Exception("No TypeSerializer for " + maxSerializationAttribute.ReturnType);
 		}
 	}
 }

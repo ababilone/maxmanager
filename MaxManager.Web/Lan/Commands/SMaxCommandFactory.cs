@@ -1,10 +1,16 @@
+using MaxManager.Web.State;
+
 namespace MaxManager.Web.Lan.Commands
 {
 	public class SMaxCommandFactory
 	{
-		public IMaxCommand CreateTemperatureAndModeCommand(string rfAddress, int roomId)
+		public IMaxCommand CreateTemperatureAndModeCommand(MaxRfAddress rfAddress, int roomId)
 		{
-			return new SMaxCommand("000440000000", rfAddress, roomId);
+			return new STemperatureAndModeMaxCommand
+			{
+				RfAddress = rfAddress,
+				RoomId = roomId
+			};
 		}
 	}
 }
