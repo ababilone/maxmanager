@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Core;
@@ -9,7 +10,6 @@ using MaxManager.Model;
 using MaxManager.Web.Lan;
 using MaxManager.Web.Lan.Events;
 using MaxManager.Web.Lan.Parser.Message;
-using MaxManager.Web.State;
 
 namespace MaxManager.ViewModels
 {
@@ -24,20 +24,20 @@ namespace MaxManager.ViewModels
 			_navigationService = navigationService;
 
 			//ConnectCommand = new RelayCommand(() => Connect());
-			Rooms = new ObservableCollection<MaxRoom>();
+			Rooms = new ObservableCollection<RoomViewModel>();
 			MaxEvents = new ObservableCollection<MaxEvent>();
 
 			_maxConnector.StateUpdated += MaxConnectorOnStateUpdated;
 			_maxConnector.MessageReceived += (sender, args) => AddMaxEvent(new MaxEvent("< " + args.MaxMessage.ToString()));
-			_maxConnector.CommandSent += (sender, args) => AddMaxEvent(new MaxEvent("> "+  args.MaxCommand.ToString()));
+			_maxConnector.CommandSent += (sender, args) => AddMaxEvent(new MaxEvent("> " + args.MaxCommand.ToString()));
 			_maxConnector.Connected += (sender, args) => AddMaxEvent(new MaxEvent("@ Connected to " + args.Host));
 			_maxConnector.ExceptionThrowed += (sender, args) => AddMaxEvent(new MaxEvent("@ Exception throwed: " + args.Exception.Message));
 		}
 
 		public ICommand ConnectCommand { get; set; }
 
-		public ObservableCollection<MaxRoom> Rooms { get; set; }
-		public ObservableCollection<MaxEvent> MaxEvents { get; } 
+		public ObservableCollection<RoomViewModel> Rooms { get; set; }
+		public ObservableCollection<MaxEvent> MaxEvents { get; }
 
 		public string ConnectResult
 		{
@@ -55,10 +55,15 @@ namespace MaxManager.ViewModels
 		{
 			DispatcherHelper.CheckBeginInvokeOnUI(() =>
 			{
-				Rooms.Clear();
 				foreach (var maxRoom in stateUpdatedEventArgs.Rooms)
 				{
-					Rooms.Add(maxRoom);
+					var roomViewModel = Rooms.FirstOrDefault(model => model.MaxRoom.Id == maxRoom.Id);
+					if (roomViewModel == null)
+					{
+						roomViewModel = new RoomViewModel(_maxConnector);
+						Rooms.Add(roomViewModel);
+					}
+					roomViewModel.Update(maxRoom);
 				}
 			});
 		}

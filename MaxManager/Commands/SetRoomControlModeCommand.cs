@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows.Input;
+using MaxManager.ViewModels;
 using MaxManager.Web.Lan;
 using MaxManager.Web.Lan.Commands;
+using MaxManager.Web.Lan.Parser;
 
 namespace MaxManager.Commands
 {
@@ -21,11 +23,19 @@ namespace MaxManager.Commands
 
 		public async void Execute(object parameter)
 		{
-			if (parameter == null)
+			var roomViewModel = parameter as RoomViewModel;
+			if (roomViewModel == null)
 				return;
 
-			var maxCommand = new SMaxCommandFactory().CreateTemperatureAndModeCommand(null, 0);
-			//await _maxConnector.Send(maxCommand);
+			var maxCommand = new STemperatureAndModeMaxCommand
+			{
+				Mode = MaxRoomControlMode.Auto,
+				Temperature = (int)roomViewModel.SetPointTemperature * 2,
+				RoomId = roomViewModel.MaxRoom.Id,
+				RfAddress = roomViewModel.MaxRoom.GroupRfAddress
+			};
+		
+			await _maxConnector.Send(maxCommand);
 		}
 
 		public event EventHandler CanExecuteChanged;

@@ -21,6 +21,6 @@ namespace MaxManager.Web.State
 		public MaxCube Cube { get; set; }
 
 		public double SetPointTemperature => Devices.FirstOrDefault()?.SetPointTemperature ?? 0;
-		public string GroupRfAddress { get; set; }
+		public MaxRfAddress GroupRfAddress { get; set; }
 	}
 }

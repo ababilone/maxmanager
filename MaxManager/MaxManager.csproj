@@ -95,10 +95,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Commands\SetModeCommand.cs" />
+    <Compile Include="Commands\SetRoomControlModeCommand.cs" />
     <Compile Include="MaxWorker.cs" />
     <Compile Include="Model\CubeInfoWithHostName.cs" />
     <Compile Include="Model\MaxEvent.cs" />
+    <Compile Include="ViewModels\RoomViewModel.cs" />
     <Compile Include="Views\MaxHeader.xaml.cs">
       <DependentUpon>MaxHeader.xaml</DependentUpon>
     </Compile>

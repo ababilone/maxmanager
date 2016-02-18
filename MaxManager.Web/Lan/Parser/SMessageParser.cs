@@ -15,7 +15,7 @@ namespace MaxManager.Web.Lan.Parser
 
 			return new SMessage
 			{
-				CommandResult = Convert.ToBoolean(splitted[1]),
+				CommandResult = splitted[1] == "1",
 				DutyCycle = Convert.ToInt32(splitted[0]),
 				FreeMemorySlot = Convert.ToInt32(splitted[2])
 			};

@@ -22,5 +22,16 @@ namespace MaxManager.Web.Lan.Commands
 
 		[MaxSerialization(BytePos = 13, ByteSpan = 1, ReturnType = typeof(TimeSpan?))]
 		public TimeSpan? TimeUntil { get; set; }
+
+		public DateTime? Until => DateUntil?.Add(TimeUntil ?? TimeSpan.Zero);
+
+		public override string ToString()
+		{
+			if (Mode == MaxRoomControlMode.Holiday)
+			{
+				return $"Setting room {RoomId} to t° {Temperature/2} (Mode {Mode} until {Until})";
+            }
+			return $"Setting room {RoomId} to t° {Temperature/2} (Mode {Mode})";
+		}
 	}
 }

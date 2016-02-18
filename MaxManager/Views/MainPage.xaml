@@ -31,7 +31,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Mode" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" />
-                                <Button Grid.Column="2" Content="Auto" Background="#ec6d23" Foreground="White" Margin="5" />
+                                <Button Grid.Column="2" Content="Auto" Background="#ec6d23" Foreground="White" Margin="5" Command="{Binding SetRoomControlModeCommand}" CommandParameter="{Binding}" />
                                 <Button Grid.Column="3" Content="Manual" Background="LightGray" Foreground="White" Margin="5" />
                             </Grid>
                         </Grid>

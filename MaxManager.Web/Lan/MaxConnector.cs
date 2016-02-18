@@ -135,6 +135,7 @@ namespace MaxManager.Web.Lan
 					catch (Exception e)
 					{
 						ExceptionThrowed?.Invoke(this, new ExceptionThrowedEventArgs { Exception = e });
+						_currentLine = "";
 					}
 				}
 			}

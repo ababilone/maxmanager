@@ -38,7 +38,12 @@ namespace MaxManager.Web.Lan.Parser
 				var name = Encoding.UTF8.GetString(data, offset, nameLength);
 				offset += nameLength;
 
-				var groupRfAddress = BitConverter.ToString(data, offset, 3);
+				var groupRfAddress = new MaxRfAddress
+				{
+					Bytes = data.Skip(offset).Take(3).ToArray(),
+					HumanReadable = BitConverter.ToString(data, offset, 3)
+				};
+
 				offset += 3;
 
 				var maxRoom = new MaxRoom
