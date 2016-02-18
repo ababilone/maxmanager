@@ -107,7 +107,7 @@ namespace MaxManager.Web.Lan.Serialization
 
 		public byte[] Serialize<T>(T maxCommand) where T : IMaxCommand
 		{
-			var type = typeof(T);
+			var type = maxCommand.GetType();
 			var propertyInfos = type.GetProperties();
 
 			var byteWriter = new ByteWriter();
