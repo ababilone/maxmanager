@@ -10,10 +10,12 @@ namespace MaxManager.Commands
 	class SetRoomControlModeCommand : ICommand
 	{
 		private readonly IMaxConnector _maxConnector;
+		private readonly MaxRoomControlMode _roomControlMode;
 
-		public SetRoomControlModeCommand(IMaxConnector maxConnector)
+		public SetRoomControlModeCommand(IMaxConnector maxConnector, MaxRoomControlMode roomControlMode)
 		{
 			_maxConnector = maxConnector;
+			_roomControlMode = roomControlMode;
 		}
 
 		public bool CanExecute(object parameter)
@@ -29,7 +31,7 @@ namespace MaxManager.Commands
 
 			var maxCommand = new STemperatureAndModeMaxCommand
 			{
-				Mode = MaxRoomControlMode.Auto,
+				Mode = _roomControlMode,
 				Temperature = (int)roomViewModel.SetPointTemperature * 2,
 				RoomId = roomViewModel.MaxRoom.Id,
 				RfAddress = roomViewModel.MaxRoom.GroupRfAddress

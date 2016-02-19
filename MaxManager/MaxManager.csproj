@@ -99,6 +99,7 @@
     <Compile Include="MaxWorker.cs" />
     <Compile Include="Model\CubeInfoWithHostName.cs" />
     <Compile Include="Model\MaxEvent.cs" />
+    <Compile Include="ValueConverters\BooleanToBrushConverter.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
     <Compile Include="Views\MaxHeader.xaml.cs">
       <DependentUpon>MaxHeader.xaml</DependentUpon>

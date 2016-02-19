@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using MaxManager.Web.Lan.Parser;
 
 namespace MaxManager.Web.State
 {
@@ -21,6 +22,7 @@ namespace MaxManager.Web.State
 		public MaxCube Cube { get; set; }
 
 		public double SetPointTemperature => Devices.FirstOrDefault()?.SetPointTemperature ?? 0;
+		public MaxRoomControlMode RoomControlMode => Devices.FirstOrDefault()?.RoomControlMode ?? MaxRoomControlMode.Auto;
 		public MaxRfAddress GroupRfAddress { get; set; }
 	}
 }

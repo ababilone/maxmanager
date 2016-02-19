@@ -1,25 +1,25 @@
 ﻿using System;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media;
 
 namespace MaxManager.ValueConverters
 {
-	class BooleanToVisibilityConverter : IValueConverter
+	class BooleanToBrushConverter : IValueConverter
 	{
+		public Brush TrueBrush { get; set; }
+		public Brush FalseBrush { get; set; }
+
 		public object Convert(object value, Type targetType, object parameter, string language)
 		{
 			if (value == null)
-				return Visibility.Collapsed;
+				return FalseBrush;
 
-			return System.Convert.ToBoolean(value) ? Visibility.Visible : Visibility.Collapsed;
+			return System.Convert.ToBoolean(value) ? TrueBrush : FalseBrush;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, string language)
 		{
-			if (value is Visibility && (Visibility) value == Visibility.Visible)
-				return true;
-
-			return false;
+			throw new NotImplementedException();
 		}
 	}
 }

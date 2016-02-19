@@ -5,9 +5,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:MaxManager.Views"
+    xmlns:valueConverters="using:MaxManager.ValueConverters"
     mc:Ignorable="d"
     DataContext="{Binding Main,Source={StaticResource Locator}}"
     >
+    <views:BindablePage.Resources>
+        <valueConverters:BooleanToBrushConverter x:Key="BooleanToBrushConverter" TrueBrush="#ec6d23" FalseBrush="LightGray" />
+    </views:BindablePage.Resources>
     <views:MaxHeader>
         <Grid>
             <GridView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Rooms}">
@@ -31,8 +35,8 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Mode" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" />
-                                <Button Grid.Column="2" Content="Auto" Background="#ec6d23" Foreground="White" Margin="5" Command="{Binding SetRoomControlModeCommand}" CommandParameter="{Binding}" />
-                                <Button Grid.Column="3" Content="Manual" Background="LightGray" Foreground="White" Margin="5" />
+                                <Button Grid.Column="2" Content="Auto" Background="{Binding IsRoomControlModeAuto, Converter={StaticResource BooleanToBrushConverter}}" Foreground="White" Margin="5" Command="{Binding SetRoomControlModeToAutoCommand}" CommandParameter="{Binding}" />
+                                <Button Grid.Column="3" Content="Manual" Background="{Binding IsRoomControlModeManual, Converter={StaticResource BooleanToBrushConverter}}" Foreground="White" Margin="5" Command="{Binding SetRoomControlModeToManualCommand}" CommandParameter="{Binding}" />
                             </Grid>
                         </Grid>
                     </DataTemplate>
