@@ -5,9 +5,10 @@ Universal Windows Application that allows to manage a Max! / eQ-3 cube
 
 #### Features ####
 
-- UWP Apps working on Windows 10 (desktop)
+- UWP App working on Windows 10 (desktop)
 - Discovery of local cubes (LAN)
 - Display current rooms state (like in Max! Portal)
+- Set room temperature / mode
 
 #### Credits ####
 
