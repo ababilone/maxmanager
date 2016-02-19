@@ -34,7 +34,7 @@ namespace MaxManager
 			if (maxConnector == null)
 				return;
 
-			await maxConnector.Send(MaxCommands.L);
+			await maxConnector.SendAsync(MaxCommands.L);
 		}
 
 		private void Destroyed(ThreadPoolTimer timer)

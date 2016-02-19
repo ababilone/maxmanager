@@ -1,29 +1,24 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Background;
 using Windows.Networking;
 using Windows.Networking.Sockets;
-using Windows.Storage.Streams;
-using MaxManager.Web.Components;
 using MaxManager.Web.Lan.Commands;
 using MaxManager.Web.Lan.Events;
 using MaxManager.Web.Lan.Merger;
 using MaxManager.Web.Lan.Parser;
+using MaxManager.Web.Lan.Parser.Message;
 using MaxManager.Web.State;
+using MaxManager.Web.Utils;
 
 namespace MaxManager.Web.Lan
 {
 	public class MaxConnector : IMaxConnector
 	{
-		private const string SocketId = "MaxSocket";
-
 		private readonly int _port = 62910;
 		private readonly MaxParser _maxParser;
 		private readonly MaxMerger _maxMerger;
 		private readonly MaxCube _maxCube;
 		private StreamSocket _streamSocket;
-		private IBackgroundTaskRegistration _backgroundTaskRegistration = null;
 
 		public MaxConnector(MaxParser maxParser, MaxMerger maxMerger)
 		{
@@ -43,117 +38,33 @@ namespace MaxManager.Web.Lan
 
 		public MaxConnectionState ConnectionState { get; }
 
-		private void CreateBackgroundTask()
-		{
-			if (_backgroundTaskRegistration != null)
-				return;
-
-			var socketActivityTrigger = new SocketActivityTrigger();
-			var socketTaskBuilder = new BackgroundTaskBuilder
-			{
-				Name = "MaxManager.Web.Lan.SocketActivityTask",
-				TaskEntryPoint = typeof(SocketActivityTask).FullName
-			};
-			socketTaskBuilder.SetTrigger(socketActivityTrigger);
-
-			try
-			{
-				_backgroundTaskRegistration = socketTaskBuilder.Register();
-			}
-			catch (Exception e)
-			{
-
-			}
-		}
-
 		private void CreateStreamSocket()
 		{
 			if (_streamSocket != null)
 				return;
 
 			_streamSocket = new StreamSocket();
-			//_streamSocket.EnableTransferOwnership(_backgroundTaskRegistration.TaskId, SocketActivityConnectedStandbyAction.Wake);
 		}
 
-		public async Task Connect(string host)
+		public async Task ConnectAsync(string host)
 		{
-			CreateBackgroundTask();
-
 			CreateStreamSocket();
 
 			await _streamSocket.ConnectAsync(new HostName(host), _port.ToString(), SocketProtectionLevel.PlainSocket);
 
 			Connected?.Invoke(this, new ConnectedEventArgs { Host = host });
-
-			await Process();
-			//_streamSocket.TransferOwnership(SocketId);
+			
+			await InitialFetchesAsync();
 		}
 
-		private string _currentLine = string.Empty;
-		private readonly List<string> _previousLines = new List<string>();
-
-		public async Task Process()
-		{
-			if (_streamSocket == null)
-				return;
-
-			using (var dataReader = new DataReader(_streamSocket.InputStream))
-			{
-				while (true)
-				{
-					try
-					{
-						var count = await dataReader.LoadAsync(1);
-						if (count != 1)
-							return;
-
-						var readString = dataReader.ReadString(1);
-						if (readString != "\n")
-						{
-							_currentLine += readString;
-						}
-						else
-						{
-							var message = _maxParser.Parse(_currentLine);
-
-							if (message != null)
-								MessageReceived?.Invoke(this, new MessageReceivedEventArgs { When = DateTime.Now, MaxMessage = message });
-
-							_maxMerger.Merge(_maxCube, message);
-
-							var stateUpdatedEventArgs = new StateUpdatedEventArgs
-							{
-								Rooms = _maxCube.Rooms,
-							};
-							StateUpdated?.Invoke(this, stateUpdatedEventArgs);
-
-							_previousLines.Add(_currentLine);
-							_currentLine = string.Empty;
-							await Task.Delay(50);
-						}
-					}
-					catch (Exception e)
-					{
-						ExceptionThrowed?.Invoke(this, new ExceptionThrowedEventArgs { Exception = e });
-						_currentLine = "";
-					}
-				}
-			}
-		}
-
-		public async Task Send(IMaxCommand maxCommand)
+		public async Task SendAsync(IMaxCommand maxCommand)
 		{
 			if (_streamSocket == null)
 				return;
 
 			try
 			{
-				using (var dataWriter = new DataWriter(_streamSocket.OutputStream))
-				{
-					dataWriter.WriteString(maxCommand.Body);
-					await dataWriter.StoreAsync();
-					dataWriter.DetachStream();
-				}
+				await _streamSocket.OutputStream.WriteLine(maxCommand.Body);
 			}
 			catch (Exception e)
 			{
@@ -162,7 +73,54 @@ namespace MaxManager.Web.Lan
 
 			CommandSent?.Invoke(this, new CommandSentEventArgs { When = DateTime.Now, MaxCommand = maxCommand });
 
-			await Process();
+			await FetchMessageAsync();
+		}
+
+		private async Task InitialFetchesAsync()
+		{
+			while (true)
+			{
+				var message = await FetchMessageAsync();
+				if (message is LMessages)
+					break;
+			}
+		}
+
+		private async Task<IMaxMessage> FetchMessageAsync()
+		{
+			if (_streamSocket == null)
+				return null;
+
+			try
+			{
+				var currentLine = await _streamSocket.InputStream.ReadLine();
+				if (currentLine == null)
+					return null;
+
+				var message = _maxParser.Parse(currentLine);
+				if (message != null)
+					ProcessMessage(message);
+
+				return message;
+			}
+			catch (Exception e)
+			{
+				ExceptionThrowed?.Invoke(this, new ExceptionThrowedEventArgs { Exception = e });
+				return null;
+			}
+		}
+
+		private void ProcessMessage(IMaxMessage message)
+		{
+			MessageReceived?.Invoke(this, new MessageReceivedEventArgs { When = DateTime.Now, MaxMessage = message });
+
+			_maxMerger.Merge(_maxCube, message);
+
+			var stateUpdatedEventArgs = new StateUpdatedEventArgs
+			{
+				Rooms = _maxCube.Rooms,
+			};
+			StateUpdated?.Invoke(this, stateUpdatedEventArgs);
 		}
 
 		public void Dispose()

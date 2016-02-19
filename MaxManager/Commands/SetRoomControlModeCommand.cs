@@ -35,7 +35,7 @@ namespace MaxManager.Commands
 				RfAddress = roomViewModel.MaxRoom.GroupRfAddress
 			};
 		
-			await _maxConnector.Send(maxCommand);
+			await _maxConnector.SendAsync(maxCommand);
 		}
 
 		public event EventHandler CanExecuteChanged;

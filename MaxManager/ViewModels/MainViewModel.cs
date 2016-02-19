@@ -48,7 +48,7 @@ namespace MaxManager.ViewModels
 
 		private async void Connect(CubeInfoWithHostName cubeInfoWithHostName)
 		{
-			await _maxConnector.Connect(cubeInfoWithHostName.HostName.ToString());
+			await _maxConnector.ConnectAsync(cubeInfoWithHostName.HostName.ToString());
 		}
 
 		private void MaxConnectorOnStateUpdated(object sender, StateUpdatedEventArgs stateUpdatedEventArgs)

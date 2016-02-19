@@ -207,6 +207,7 @@
     <Compile Include="State\MaxShutterContactDeviceState.cs" />
     <Compile Include="State\MaxTemperatureProfilSwitchPoint.cs" />
     <Compile Include="State\MaxWeekTemperatureProfile.cs" />
+    <Compile Include="Utils\StreamUtils.cs" />
     <EmbeddedResource Include="Properties\MaxManager.Web.rd.xml" />
   </ItemGroup>
   <ItemGroup>

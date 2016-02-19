@@ -9,9 +9,8 @@ namespace MaxManager.Web.Lan
 	{
 		event StateUpdatedEventHandler StateUpdated;
 
-		Task Connect(string host);
-		Task Process();
-		Task Send(IMaxCommand maxCommand);
+		Task ConnectAsync(string host);
+		Task SendAsync(IMaxCommand maxCommand);
 
 		event MessageReceivedEventHandler MessageReceived;
 		event CommandSentEventHandler CommandSent;
