@@ -25,8 +25,13 @@ namespace MaxManager.ViewModels
 		private IMaxConnector CreateMaxConnector()
 		{
 			var maxParser = new MaxParser();
+			return new MaxConnector(maxParser);
+		}
+
+		private IMaxStateAnalyzer CreateMaxStateAnalyzer(IMaxConnector maxConnector)
+		{
 			var maxMerger = new MaxMerger();
-			return new MaxConnector(maxParser, maxMerger);
+			return new MaxStateAnalyzer(maxConnector, maxMerger);
 		}
 
 		public ViewModelLocator()
@@ -34,7 +39,12 @@ namespace MaxManager.ViewModels
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
 			SimpleIoc.Default.Register(CreateNavigationService);
-			SimpleIoc.Default.Register(CreateMaxConnector);
+
+			var maxConnector = CreateMaxConnector();
+			SimpleIoc.Default.Register(() => maxConnector);
+
+			var maxStateAnalyzer = CreateMaxStateAnalyzer(maxConnector);
+			SimpleIoc.Default.Register(() => maxStateAnalyzer);
 
 			if (ViewModelBase.IsInDesignModeStatic)
 			{

@@ -7,8 +7,6 @@ namespace MaxManager.Web.Lan
 {
 	public interface IMaxConnector : IDisposable
 	{
-		event StateUpdatedEventHandler StateUpdated;
-
 		Task ConnectAsync(string host);
 		Task SendAsync(IMaxCommand maxCommand);
 

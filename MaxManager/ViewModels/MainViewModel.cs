@@ -9,7 +9,6 @@ using GalaSoft.MvvmLight.Views;
 using MaxManager.Model;
 using MaxManager.Web.Lan;
 using MaxManager.Web.Lan.Events;
-using MaxManager.Web.Lan.Parser.Message;
 
 namespace MaxManager.ViewModels
 {
@@ -18,7 +17,7 @@ namespace MaxManager.ViewModels
 		private readonly IMaxConnector _maxConnector;
 		private readonly INavigationService _navigationService;
 
-		public MainViewModel(IMaxConnector maxConnector, INavigationService navigationService)
+		public MainViewModel(IMaxStateAnalyzer maxStateAnalyzer, IMaxConnector maxConnector, INavigationService navigationService)
 		{
 			_maxConnector = maxConnector;
 			_navigationService = navigationService;
@@ -27,7 +26,7 @@ namespace MaxManager.ViewModels
 			Rooms = new ObservableCollection<RoomViewModel>();
 			MaxEvents = new ObservableCollection<MaxEvent>();
 
-			_maxConnector.StateUpdated += MaxConnectorOnStateUpdated;
+			maxStateAnalyzer.StateUpdated += MaxConnectorOnStateUpdated;
 			_maxConnector.MessageReceived += (sender, args) => AddMaxEvent(new MaxEvent("< " + args.MaxMessage.ToString()));
 			_maxConnector.CommandSent += (sender, args) => AddMaxEvent(new MaxEvent("> " + args.MaxCommand.ToString()));
 			_maxConnector.Connected += (sender, args) => AddMaxEvent(new MaxEvent("@ Connected to " + args.Host));
