@@ -210,12 +210,6 @@
     <Compile Include="Utils\StreamUtils.cs" />
     <EmbeddedResource Include="Properties\MaxManager.Web.rd.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MaxManager.Web.Components\MaxManager.Web.Components.csproj">
-      <Project>{5D0CB410-FBA9-4375-8D54-56B5404DCB57}</Project>
-      <Name>MaxManager.Web.Components</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
