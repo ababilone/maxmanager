@@ -22,14 +22,6 @@ namespace MaxManager
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                DebugSettings.EnableFrameRateCounter = true;
-            }
-#endif
-
 			var rootFrame = Window.Current.Content as Frame;
 
             if (rootFrame == null)
