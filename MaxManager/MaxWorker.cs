@@ -35,7 +35,6 @@ namespace MaxManager
 				return;
 
 			await maxConnector.Send(MaxCommands.L);
-			await maxConnector.Process();
 		}
 
 		private void Destroyed(ThreadPoolTimer timer)
