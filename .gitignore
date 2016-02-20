@@ -27,3 +27,8 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
+MaxManager/AppPackages/
+MaxManager/BundleArtifacts/
+MaxManager/_*
+MaxManager/MaxManager_StoreKey.pfx
+MaxManager/Package.StoreAssociation.xml

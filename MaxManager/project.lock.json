@@ -3,19 +3,6 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
-      "Antlr4/4.5.0-alpha003": {
-        "dependencies": {
-          "Antlr4.Runtime": "[4.5.0-alpha003, )"
-        }
-      },
-      "Antlr4.Runtime/4.5.0-alpha003": {
-        "compile": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        },
-        "runtime": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        }
-      },
       "CommonServiceLocator/1.3.0": {
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
@@ -1574,19 +1561,6 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "Antlr4/4.5.0-alpha003": {
-        "dependencies": {
-          "Antlr4.Runtime": "[4.5.0-alpha003, )"
-        }
-      },
-      "Antlr4.Runtime/4.5.0-alpha003": {
-        "compile": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        },
-        "runtime": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        }
-      },
       "CommonServiceLocator/1.3.0": {
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
@@ -3235,19 +3209,6 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "Antlr4/4.5.0-alpha003": {
-        "dependencies": {
-          "Antlr4.Runtime": "[4.5.0-alpha003, )"
-        }
-      },
-      "Antlr4.Runtime/4.5.0-alpha003": {
-        "compile": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        },
-        "runtime": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        }
-      },
       "CommonServiceLocator/1.3.0": {
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
@@ -4868,19 +4829,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "Antlr4/4.5.0-alpha003": {
-        "dependencies": {
-          "Antlr4.Runtime": "[4.5.0-alpha003, )"
-        }
-      },
-      "Antlr4.Runtime/4.5.0-alpha003": {
-        "compile": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        },
-        "runtime": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        }
-      },
       "CommonServiceLocator/1.3.0": {
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
@@ -6534,19 +6482,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "Antlr4/4.5.0-alpha003": {
-        "dependencies": {
-          "Antlr4.Runtime": "[4.5.0-alpha003, )"
-        }
-      },
-      "Antlr4.Runtime/4.5.0-alpha003": {
-        "compile": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        },
-        "runtime": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        }
-      },
       "CommonServiceLocator/1.3.0": {
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
@@ -8167,19 +8102,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "Antlr4/4.5.0-alpha003": {
-        "dependencies": {
-          "Antlr4.Runtime": "[4.5.0-alpha003, )"
-        }
-      },
-      "Antlr4.Runtime/4.5.0-alpha003": {
-        "compile": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        },
-        "runtime": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        }
-      },
       "CommonServiceLocator/1.3.0": {
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
@@ -9833,19 +9755,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "Antlr4/4.5.0-alpha003": {
-        "dependencies": {
-          "Antlr4.Runtime": "[4.5.0-alpha003, )"
-        }
-      },
-      "Antlr4.Runtime/4.5.0-alpha003": {
-        "compile": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        },
-        "runtime": {
-          "lib/netcore45/Antlr4.Runtime.dll": {}
-        }
-      },
       "CommonServiceLocator/1.3.0": {
         "compile": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
@@ -11467,67 +11376,6 @@
     }
   },
   "libraries": {
-    "Antlr4/4.5.0-alpha003": {
-      "sha512": "Sj+OYpLaNcKoy6Tae6H+qXzSWYCI58TRXr3BG8Q1TFpSXz02X6o/ABFYDXTelKlhnxQni24Re+pn+Rm+MLGbdw==",
-      "type": "Package",
-      "files": [
-        "[Content_Types].xml",
-        "_rels/.rels",
-        "Antlr4.nuspec",
-        "build/Antlr4.props",
-        "build/Antlr4.targets",
-        "build/Antlr4BuildTasks.net40.dll",
-        "package/services/metadata/core-properties/69a1adc3e43e4d0386da5885b208caa4.psmdcp",
-        "tools/antlr4-csharp-4.5-SNAPSHOT-complete.jar",
-        "tools/IKVM.AWT.WinForms.dll",
-        "tools/ikvm.exe",
-        "tools/ikvm.exe.config",
-        "tools/IKVM.OpenJDK.Beans.dll",
-        "tools/IKVM.OpenJDK.Charsets.dll",
-        "tools/IKVM.OpenJDK.Corba.dll",
-        "tools/IKVM.OpenJDK.Core.dll",
-        "tools/IKVM.OpenJDK.Management.dll",
-        "tools/IKVM.OpenJDK.Media.dll",
-        "tools/IKVM.OpenJDK.Misc.dll",
-        "tools/IKVM.OpenJDK.Naming.dll",
-        "tools/IKVM.OpenJDK.Remoting.dll",
-        "tools/IKVM.OpenJDK.Security.dll",
-        "tools/IKVM.OpenJDK.SwingAWT.dll",
-        "tools/IKVM.OpenJDK.Text.dll",
-        "tools/IKVM.OpenJDK.Util.dll",
-        "tools/IKVM.OpenJDK.XML.API.dll",
-        "tools/IKVM.Runtime.dll",
-        "tools/IKVM.Runtime.JNI.dll"
-      ]
-    },
-    "Antlr4.Runtime/4.5.0-alpha003": {
-      "sha512": "852TFZ0YQZy32voLth9iBgj7Sfu/nRqFHn1yvkmURaKyBakdGCX23oMtuWzZLraAx//AeRSa8xHeESVDbmnfsg==",
-      "type": "Package",
-      "files": [
-        "[Content_Types].xml",
-        "_rels/.rels",
-        "Antlr4.Runtime.nuspec",
-        "lib/net20/Antlr4.Runtime.dll",
-        "lib/net20/Antlr4.Runtime.xml",
-        "lib/net30/Antlr4.Runtime.dll",
-        "lib/net30/Antlr4.Runtime.xml",
-        "lib/net35-cf/Antlr4.Runtime.dll",
-        "lib/net35-cf/Antlr4.Runtime.xml",
-        "lib/net35-client/Antlr4.Runtime.dll",
-        "lib/net35-client/Antlr4.Runtime.xml",
-        "lib/net40-client/Antlr4.Runtime.dll",
-        "lib/net40-client/Antlr4.Runtime.xml",
-        "lib/net45/Antlr4.Runtime.dll",
-        "lib/net45/Antlr4.Runtime.xml",
-        "lib/netcore45/Antlr4.Runtime.dll",
-        "lib/netcore45/Antlr4.Runtime.xml",
-        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/Antlr4.Runtime.dll",
-        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/Antlr4.Runtime.xml",
-        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/Antlr4.Runtime.dll",
-        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/Antlr4.Runtime.xml",
-        "package/services/metadata/core-properties/e5ef6fdc9414499fb1cb91ba15a64ec1.psmdcp"
-      ]
-    },
     "CommonServiceLocator/1.3.0": {
       "sha512": "fbjO0SNwbOFPdwVfyqv+B7gIJ2CVBOFPKqn1mDDECK7KER8jFaOdcvroFYoAHa0ktPbxi5s+15qOLnA96f8GSA==",
       "type": "Package",
@@ -15028,7 +14876,6 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Antlr4 >= 4.5.0-alpha003",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
       "MvvmLightLibs >= 5.2.0"
     ],
