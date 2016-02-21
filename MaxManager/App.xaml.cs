@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using GalaSoft.MvvmLight.Threading;
+using MaxManager.ViewModels;
 
 namespace MaxManager
 {
@@ -20,6 +21,8 @@ namespace MaxManager
 		    _maxWorker = new MaxWorker(TimeSpan.FromSeconds(15));
         }
 
+	    public ViewModelLocator Locator => Resources["Locator"] as ViewModelLocator;
+
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 			var rootFrame = Window.Current.Content as Frame;
@@ -34,9 +37,8 @@ namespace MaxManager
                     //TODO: Load state from previously suspended application
                 }
 
-                Window.Current.Content = rootFrame;
+                Window.Current.Content = new Views.Shell(rootFrame);
             }
-			
 
 			if (rootFrame.Content == null)
             {

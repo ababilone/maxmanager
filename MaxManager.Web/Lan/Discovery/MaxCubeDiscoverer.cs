@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Networking;
@@ -13,7 +14,8 @@ namespace MaxManager.Web.Lan.Discovery
 		private readonly DatagramSocket _datagramSocket;
 		private readonly int _discoveryPort = 23272;
 		private readonly HostName _discoveryHostName = new HostName("224.0.0.1");
-
+		//private readonly HostName _discoveryHostName = new HostName("ff02::fb");
+		
 		public MaxCubeDiscoverer()
 		{
 			_datagramSocket = new DatagramSocket();
@@ -30,13 +32,19 @@ namespace MaxManager.Web.Lan.Discovery
 
 		private async Task SendDiscoveryMessage()
 		{
-			using (var outputStream = await _datagramSocket.GetOutputStreamAsync(_discoveryHostName, _discoveryPort.ToString()))
+			try
 			{
-				using (var dataWriter = new DataWriter(outputStream))
+				using (var outputStream = await _datagramSocket.GetOutputStreamAsync(_discoveryHostName, _discoveryPort.ToString()))
 				{
-					dataWriter.WriteString("eQ3Max*.**********I");
-					await dataWriter.StoreAsync();
+					using (var dataWriter = new DataWriter(outputStream))
+					{
+						dataWriter.WriteString("eQ3Max*.**********I");
+						await dataWriter.StoreAsync();
+					}
 				}
+			}
+			catch (Exception e)
+			{
 			}
 		}
 

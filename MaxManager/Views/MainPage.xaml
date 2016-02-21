@@ -14,6 +14,10 @@
     </views:BindablePage.Resources>
     <views:MaxHeader>
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
             <GridView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Rooms}">
                 <GridView.ItemTemplate>
                     <DataTemplate>
@@ -42,8 +46,9 @@
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
-            <Grid Grid.Row="0" Grid.Column="0">
-                <ItemsControl HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="500" ItemsSource="{Binding MaxEvents}">
+            <Grid Grid.Row="1" Grid.Column="0">
+                <ScrollViewer>
+                <ItemsControl HorizontalAlignment="Stretch" VerticalAlignment="Bottom" ItemsSource="{Binding MaxEvents}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel />
@@ -58,6 +63,7 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+                </ScrollViewer>
             </Grid>
         </Grid>
     </views:MaxHeader>

@@ -14,8 +14,8 @@ namespace MaxManager.ViewModels
 	{
 		private INavigationService CreateNavigationService()
 		{
-			var navigationService = new NavigationService();
-
+			var navigationService = new Services.NavigationService();
+			
 			navigationService.Configure(NavigationKeys.Home, typeof(MainPage));
 			navigationService.Configure(NavigationKeys.Discover, typeof(DiscoverPage));
 
