@@ -11,6 +11,7 @@
     >
     <views:BindablePage.Resources>
         <valueConverters:BooleanToBrushConverter x:Key="BooleanToBrushConverter" TrueBrush="#ec6d23" FalseBrush="LightGray" />
+        <valueConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </views:BindablePage.Resources>
     <views:MaxHeader>
         <Grid>
@@ -39,6 +40,10 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Mode" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" />
+                                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE850;" Visibility="{Binding IsBatteryLow, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEB90;" Visibility="{Binding IsTransmitError, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                </StackPanel>
                                 <Button Grid.Column="2" Content="Auto" Background="{Binding IsRoomControlModeAuto, Converter={StaticResource BooleanToBrushConverter}}" Foreground="White" Margin="5" Command="{Binding SetRoomControlModeToAutoCommand}" CommandParameter="{Binding}" />
                                 <Button Grid.Column="3" Content="Manual" Background="{Binding IsRoomControlModeManual, Converter={StaticResource BooleanToBrushConverter}}" Foreground="White" Margin="5" Command="{Binding SetRoomControlModeToManualCommand}" CommandParameter="{Binding}" />
                             </Grid>

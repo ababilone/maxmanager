@@ -23,6 +23,9 @@ namespace MaxManager.Web.State
 
 		public double SetPointTemperature => Devices.FirstOrDefault()?.SetPointTemperature ?? 0;
 		public MaxRoomControlMode RoomControlMode => Devices.FirstOrDefault()?.RoomControlMode ?? MaxRoomControlMode.Auto;
+		public bool IsBatteryLow => Devices.Any(device => device.State?.BatteryLow ?? false);
+		public bool IsTransmitError => Devices.Any(device => device.State?.TransmitError ?? false);
+
 		public MaxRfAddress GroupRfAddress { get; set; }
 	}
 }

@@ -34,6 +34,20 @@ namespace MaxManager.ViewModels
 		}
 		private bool _isRoomControlModeManual;
 
+		public bool IsTransmitError
+		{
+			get { return _isTransmitError; }
+			set { Set(ref _isTransmitError, value); }
+		}
+		private bool _isTransmitError;
+
+		public bool IsBatteryLow
+		{
+			get { return _isBatteryLow; }
+			set { Set(ref _isBatteryLow, value); }
+		}
+		private bool _isBatteryLow;
+		
 		public double SetPointTemperature
 		{
 			get { return _setPointTemperature; }
@@ -55,6 +69,8 @@ namespace MaxManager.ViewModels
 			SetPointTemperature = maxRoom.SetPointTemperature;
 			IsRoomControlModeAuto = maxRoom.RoomControlMode == MaxRoomControlMode.Auto;
 			IsRoomControlModeManual = maxRoom.RoomControlMode == MaxRoomControlMode.Manual;
+			IsTransmitError = maxRoom.IsTransmitError;
+			IsBatteryLow = maxRoom.IsBatteryLow;
 		}
 	}
 }
