@@ -108,6 +108,7 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ValueConverters\BooleanToBrushConverter.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\MaxHeader.xaml.cs">
       <DependentUpon>MaxHeader.xaml</DependentUpon>
     </Compile>
@@ -128,6 +129,9 @@
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\BindablePage.cs" />
     <Compile Include="Model\NavType.cs" />
+    <Compile Include="Views\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>

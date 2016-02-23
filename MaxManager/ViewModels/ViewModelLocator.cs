@@ -58,9 +58,11 @@ namespace MaxManager.ViewModels
 			SimpleIoc.Default.Register<IMaxCubeDiscoverer, MaxCubeDiscoverer>();
 			SimpleIoc.Default.Register<DiscoverViewModel>();
 			SimpleIoc.Default.Register<MainViewModel>();
+			SimpleIoc.Default.Register<SettingsViewModel>();
 		}
 
 		public MainViewModel Main => SimpleIoc.Default.GetInstance<MainViewModel>();
 		public DiscoverViewModel Discover => SimpleIoc.Default.GetInstance<DiscoverViewModel>();
+		public SettingsViewModel Settings => SimpleIoc.Default.GetInstance<SettingsViewModel>();
 	}
 }
