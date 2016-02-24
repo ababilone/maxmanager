@@ -107,8 +107,11 @@
     <Compile Include="Model\MaxEvent.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ValueConverters\BooleanToBrushConverter.cs" />
+    <Compile Include="Services\Settings\ISettingService.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
+    <Compile Include="Services\Settings\SettingService.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Services\Settings\SettingUpdatedEventHandler.cs" />
     <Compile Include="Views\MaxHeader.xaml.cs">
       <DependentUpon>MaxHeader.xaml</DependentUpon>
     </Compile>

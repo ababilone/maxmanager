@@ -1,43 +1,56 @@
-using System;
 using GalaSoft.MvvmLight;
+using MaxManager.Services.Settings;
 
 namespace MaxManager.ViewModels
 {
 	public class SettingsViewModel : ViewModelBase
 	{
+		private readonly ISettingService _settingService;
+
+		public SettingsViewModel(ISettingService settingService)
+		{
+			_settingService = settingService;
+			_settingService.SettingUpdated += (service, args) => Load();
+			Load();
+		}
+
+		private void Load()
+		{
+			RaisePropertyChanged(() => IsDiscoveryEnabled);
+			RaisePropertyChanged(() => DiscoveryTimeOut);
+			RaisePropertyChanged(() => CubeAddress);
+			RaisePropertyChanged(() => IsDebugEnabled);
+			RaisePropertyChanged(() => Theme);
+		}
+
 		public bool IsDiscoveryEnabled
 		{
-			get { return _isDiscoveryEnabled; }
-			set { Set(ref _isDiscoveryEnabled, value); }
+			get { return _settingService.IsDiscoveryEnabled; }
+			set { _settingService.IsDiscoveryEnabled = value; RaisePropertyChanged(); }
 		}
-		private bool _isDiscoveryEnabled;
 
 		public int DiscoveryTimeOut
 		{
-			get { return _discoveryTimeOut; }
-			set { Set(ref _discoveryTimeOut, value); }
+			get { return _settingService.DiscoveryTimeOut; }
+			set { _settingService.DiscoveryTimeOut = value; RaisePropertyChanged(); }
 		}
-		private int _discoveryTimeOut;
 
 		public string CubeAddress
 		{
-			get { return _cubeAddress; }
-			set { Set(ref _cubeAddress, value); }
+			get { return _settingService.CubeAddress; }
+			set { _settingService.CubeAddress = value; RaisePropertyChanged(); }
 		}
-		private string _cubeAddress;
 
 		public bool IsDebugEnabled
 		{
-			get { return _isDebugEnabled; }
-			set { Set(ref _isDebugEnabled, value); }
+			get { return _settingService.IsDebugEnabled; }
+			set { _settingService.IsDebugEnabled = value; RaisePropertyChanged(); }
 		}
-		private bool _isDebugEnabled;
 
 		public string Theme
 		{
-			get { return _theme; }
-			set { Set(ref _theme, value); }
+			get { return _settingService.Theme; }
+			set { _settingService.Theme = value; RaisePropertyChanged(); }
 		}
-		private string _theme;
 	}
 }

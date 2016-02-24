@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
+using MaxManager.Services.Settings;
 using MaxManager.Views;
 using MaxManager.Web.Lan;
 using MaxManager.Web.Lan.Discovery;
@@ -55,6 +56,7 @@ namespace MaxManager.ViewModels
 				//SimpleIoc.Default.Register<IDataService, DataService>();
 			}
 
+			SimpleIoc.Default.Register<ISettingService, SettingService>();
 			SimpleIoc.Default.Register<IMaxCubeDiscoverer, MaxCubeDiscoverer>();
 			SimpleIoc.Default.Register<DiscoverViewModel>();
 			SimpleIoc.Default.Register<MainViewModel>();
