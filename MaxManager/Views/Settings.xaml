@@ -7,12 +7,23 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     DataContext="{Binding Settings, Source={StaticResource Locator}}">
-
     <local:MaxHeader>
         <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <TextBlock Text="Settings" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" />
-            <TextBlock Text="Discovery timeout (seconds)" FontSize="{ThemeResource TextStyleLargeFontSize}" />
-            <TextBox Margin="5" Text="{Binding DiscoveryTimeOut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Cube Discovery" FontSize="{ThemeResource TextStyleLargeFontSize}" />
+            <ToggleSwitch Margin="5" IsOn="{Binding IsDiscoveryEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Cube Discovery timeout" FontSize="{ThemeResource TextStyleLargeFontSize}"  Visibility="{Binding IsDiscoveryEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <ComboBox Margin="5" SelectedItem="{Binding DiscoveryTimeOut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Visibility="{Binding IsDiscoveryEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <ComboBox.Items>
+                    <ComboBoxItem Content="1 second" IsSelected="True" />
+                    <ComboBoxItem Content="5 seconds" />
+                    <ComboBoxItem Content="15 seconds" />
+                    <ComboBoxItem Content="30 seconds" />
+                    <ComboBoxItem Content="60 seconds" />
+                </ComboBox.Items>
+            </ComboBox>
+            <TextBlock Text="Cube Address" FontSize="{ThemeResource TextStyleLargeFontSize}" Visibility="{Binding IsDiscoveryEnabled, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted}" />
+            <TextBox Margin="5" Text="{Binding CubeAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" HorizontalAlignment="Left" Visibility="{Binding IsDiscoveryEnabled, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted}"/>
             <TextBlock Text="Enable debug" FontSize="{ThemeResource TextStyleLargeFontSize}" />
             <ToggleSwitch Margin="5" IsOn="{Binding IsDebugEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Background" FontSize="{ThemeResource TextStyleLargeFontSize}" />
