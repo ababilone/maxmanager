@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Views;
 using MaxManager.Model;
+using MaxManager.Services.Settings;
 using MaxManager.Web.Lan;
 using MaxManager.Web.Lan.Events;
 
@@ -15,11 +16,13 @@ namespace MaxManager.ViewModels
 	public class MainViewModel : ViewModelBase, INavigable
 	{
 		private readonly IMaxConnector _maxConnector;
+		private readonly ISettingService _settingService;
 		private readonly INavigationService _navigationService;
 
-		public MainViewModel(IMaxStateAnalyzer maxStateAnalyzer, IMaxConnector maxConnector, INavigationService navigationService)
+		public MainViewModel(IMaxStateAnalyzer maxStateAnalyzer, IMaxConnector maxConnector, ISettingService settingService, INavigationService navigationService)
 		{
 			_maxConnector = maxConnector;
+			_settingService = settingService;
 			_navigationService = navigationService;
 
 			//ConnectCommand = new RelayCommand(() => Connect());
@@ -31,12 +34,27 @@ namespace MaxManager.ViewModels
 			_maxConnector.CommandSent += (sender, args) => AddMaxEvent(new MaxEvent("> " + args.MaxCommand.ToString()));
 			_maxConnector.Connected += (sender, args) => AddMaxEvent(new MaxEvent("@ Connected to " + args.Host));
 			_maxConnector.ExceptionThrowed += (sender, args) => AddMaxEvent(new MaxEvent("@ Exception throwed: " + args.Exception.Message));
+
+			_settingService.SettingUpdated += (service, args) => LoadSettings();
+			LoadSettings();
 		}
 
 		public ICommand ConnectCommand { get; set; }
 
 		public ObservableCollection<RoomViewModel> Rooms { get; set; }
 		public ObservableCollection<MaxEvent> MaxEvents { get; }
+
+		private void LoadSettings()
+		{
+			IsDebugEnabled = _settingService.IsDebugEnabled;
+		}
+
+		public bool IsDebugEnabled
+		{
+			get { return _isDebugEnabled; }
+			set { Set(ref _isDebugEnabled, value); }
+		}
+		private bool _isDebugEnabled;
 
 		public string ConnectResult
 		{

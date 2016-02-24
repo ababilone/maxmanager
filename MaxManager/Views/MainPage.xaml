@@ -51,7 +51,7 @@
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
-            <Grid Grid.Row="1" Grid.Column="0">
+            <Grid Grid.Row="1" Grid.Column="0" Visibility="{Binding IsDebugEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <ScrollViewer>
                 <ItemsControl HorizontalAlignment="Stretch" VerticalAlignment="Bottom" ItemsSource="{Binding MaxEvents}">
                     <ItemsControl.ItemsPanel>
